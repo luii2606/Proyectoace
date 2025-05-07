@@ -1,72 +1,119 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    /* Reset y variables */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-:root{
- --Rosa_Pastel:#F9B7C3; /*(Fondo principal)*/
---Rosa_Oscuro: #D94A59; /*(Encabezados, botones y elementos destacados)*/
- --Rojo_Vino :  #A6243C; /*(Iconos decorativos)*/
- --Crema_Claro : #FFF1EA; /*(Fondo del contenido central)*/
- --Marrón_Claro:  #5C3A2E; /*(Texto del cuerpo)*/
+    :root {
+      --rosa-pastel: #F9B7C3;
+      --rosa-oscuro: #D94A59;
+      --rojo-vino: #A6243C;
+      --crema-claro: #FFF1EA;
+      --marron-claro: #5C3A2E;
+    }
 
+    /* Bloque: login */
+    .login {
+      background-color: var(--rosa-pastel);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-}
+    /* Elemento: contenedor del bloque login */
+    .login__container {
+      background-color: var(--rosa-oscuro);
+      border-radius: 30px;
+      width: 100%;
+      max-width: 400px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
 
+    /* Elemento: título del bloque login */
+    .login__title {
+      color: var(--crema-claro);
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .login__image{
+      width: 5vw;
+      height: 5vw;
+      border-radius: 50%;
+      
+    }
+    /* Bloque: input-group */
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-.fondo__login{
-  background-color:var(--Rosa_Pastel) ;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vw;
-}
+    /* Elemento: field del bloque input-group */
+    .input-group__field {
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: var(--crema-claro);
+      font-size: 1rem;
+      outline: none;
+      color: var(--marron-claro);
+    }
 
-.contenedor__login{
-  background-color: var(--Rosa_Oscuro);
-  /* padding: 40px 30px; */
-  border-radius: 30px;
-  /* box-shadow: 0 0 15px rgba(0,0,0,0.2); */
-  width: 35vw;
-  height: 35vw;
-  text-align: center;
-  margin-bottom: 55vw;
-  
-}
-.input__sec {
-  width: 100%;
-  /* padding: 12px; */
-  margin: 10px 0;
-  border: none;
-  border-radius: 20px;
-  /* outline: none; */
-  font-size: 14px;
-}
+    .input-group__field::placeholder {
+      color: var(--marron-claro);
+      opacity: 0.7;
+    }
 
-.btn__siguiente{
-  background-color: #754c3d;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: 10px;
-}
+    /* Bloque: button */
+    .button {
+      background-color: var(--marron-claro);
+      color: var(--crema-claro);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-weight: bold;
+    }
 
-.btn__siguiente:hover {
-  background-color: #5e3d32;
-}
+    /* Modificador: button--hover */
+    .button--hover:hover {
+      background-color: var(--rosa-pastel);
+      transform: translateY(-2px);
+      color: var(--marron-claro);
+    }
 
-.registro {
-  display: block;
-  margin-top: 15px;
-  color: #ccc;
-  font-size: 12px;
-  text-decoration: none;
-}
+    /* Bloque: link */
+    .link {
+      display: block;
+      margin-top: 20px;
+      color: var(--crema-claro);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
 
-.registro:hover {
-  text-decoration: underline;
-}
+    /* Modificador: link--hover */
+    .link--hover:hover {
+      text-decoration: underline;
+      color: white;
+    }
+
+    /* Elemento: referente del bloque login */
+    .login__referente {
+      color: var(--crema-claro);
+      font-size: 0.8rem;
+      margin-top: 30px;
+      opacity: 0.7;
+    }
