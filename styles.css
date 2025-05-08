@@ -22,10 +22,11 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      position: relative;
     }
 
     /* Elemento: contenedor del bloque login */
-    .login__container {
+    .login__container, .registro__container {
       background-color: var(--rosa-oscuro);
       border-radius: 30px;
       width: 100%;
@@ -36,21 +37,23 @@
     }
 
     /* Elemento: título del bloque login */
-    .login__title {
+    .login__title, .registro__title {
       color: var(--crema-claro);
       font-size: 2.5rem;
       text-align: center;
       font-weight: bold;
       margin-bottom: 30px;
     }
-    .login__image{
+    
+    .login__image, .registro__image {
       width: 5vw;
       height: 5vw;
-      border-radius: 50%;
-      
+      border-radius: 50%; 
+      margin-bottom: 20px;
     }
+    
     /* Bloque: input-group */
-    .input-group {
+    .input-group, .input-grouptwo {
       margin-bottom: 20px;
       position: relative;
     }
@@ -102,6 +105,7 @@
       font-size: 0.9rem;
       text-decoration: none;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     /* Modificador: link--hover */
@@ -109,11 +113,33 @@
       text-decoration: underline;
       color: white;
     }
-
-    /* Elemento: referente del bloque login */
-    .login__referente {
-      color: var(--crema-claro);
-      font-size: 0.8rem;
-      margin-top: 30px;
-      opacity: 0.7;
+    
+    /* Ocultar los radio buttons */
+    .login__miniciarsesion,
+    .login__mregistrarse {
+      display: none;
+    }
+    
+    /* Ocultar formulario de registro inicialmente */
+    .formularioregistro {
+      display: none;
+      position: absolute;
+      width: 100%;
+    }
+    
+    /* Mostrar formulario de registro cuando el radio está seleccionado */
+    #mregistrarse:checked ~ .formularioregistro {
+      display: flex;
+      justify-content: center;
+    }
+    
+    /* Ocultar formulario de inicio cuando el radio de registro está seleccionado */
+    #mregistrarse:checked ~ .formularioiniciosesion {
+      display: none;
+    }
+    
+    /* Mostrar formulario de inicio cuando el radio está seleccionado */
+    #miniciarsesion:checked ~ .formularioiniciosesion {
+      display: flex;
+      justify-content: center;
     }

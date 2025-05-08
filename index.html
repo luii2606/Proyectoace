@@ -7,22 +7,53 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="login">
-    <div class="login__container">
-      <h1 class="login__title">ACE</h1>
-      <img src="descarga (6).jpeg" alt="Logo ACE" class="login__image">
-      
-      <div class="input-group">
-        <input type="text" class="input-group__field" placeholder="Nombre de usuario">
+  <!-- Inicio de Sesión  -->
+ <div class="login">
+    <!-- Radio buttons ocultos para controlar la visualización -->
+    <input type="radio" id="miniciarsesion" name="radios" checked>
+    <input type="radio" id="mregistrarse" name="radios">
+    
+    <!-- Formulario de Inicio de Sesión -->
+    <form action="#" class="formularioiniciosesion">
+      <div class="login__container">
+        <h1 class="login__title">ACE</h1>
+        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
+        
+        <div class="input-group">
+          <input type="text" class="input-group__field" placeholder="Nombre de usuario">
+        </div>
+        
+        <div class="input-group">
+          <input type="password" class="input-group__field" placeholder="Contraseña">
+        </div>
+        
+        <button class="button button--hover">Siguiente</button>
+        <label for="mregistrarse" class="link link--hover">Registrarse</label>
       </div>
-      
-      <div class="input-group">
-        <input type="password" class="input-group__field" placeholder="Contraseña">
+    </form>
+    
+    <!-- Formulario de Registro -->
+    <form action="#" class="formularioregistro">
+      <div class="registro__container">
+        <h1 class="registro__title">ACE</h1>
+        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="registro__image">
+
+        <div class="input-grouptwo">
+          <input type="text" class="input-group__field" placeholder="Documento de Identidad">
+        </div>
+
+        <div class="input-grouptwo">
+          <input type="text" class="input-group__field" placeholder="Elige un Nombre de usuario">
+        </div>
+
+        <div class="input-grouptwo">
+          <input type="password" class="input-group__field" placeholder="Elige una Contraseña">
+        </div>
+        
+        <button class="button button--hover">Siguiente</button>
+        <label for="miniciarsesion" class="link link--hover">Iniciar Sesión</label>
       </div>
-      
-      <button class="button button--hover">Siguiente</button>
-      <a href="#" class="link link--hover">Registrarse</a>
-    </div>
+    </form>
   </div>
 </body>
 </body>
