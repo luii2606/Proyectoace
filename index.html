@@ -5,56 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyecto ACE</title>
   <link rel="stylesheet" href="styles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <!-- Inicio de Sesión  -->
- <div class="login">
-    <!-- Radio buttons ocultos para controlar la visualización -->
-    <input type="radio" id="miniciarsesion" name="radios" checked>
-    <input type="radio" id="mregistrarse" name="radios">
+  <!-- Login Section -->
+  <div class="login">
+    <input type="radio" id="miniciarsesion" name="radios" class="login__radio login__radio--iniciar" checked>
+    <input type="radio" id="mregistrarse" name="radios" class="login__radio login__radio--registrar">
     
-    <!-- Formulario de Inicio de Sesión -->
-    <form action="#" class="formularioiniciosesion">
+    <!-- Login Form -->
+    <form action="#" class="login__form login__form--inicio">
       <div class="login__container">
         <h1 class="login__title">ACE</h1>
         <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
         
-        <div class="input-group">
-          <input type="text" class="input-group__field" placeholder="Nombre de usuario">
+        <div class="login__input-group">
+          <input type="text" class="login__input" placeholder="Nombre de usuario">
         </div>
         
-        <div class="input-group">
-          <input type="password" class="input-group__field" placeholder="Contraseña">
+        <div class="login__input-group">
+          <input type="password" class="login__input" placeholder="Contraseña">
         </div>
         
-        <button class="button button--hover">Siguiente</button>
-        <label for="mregistrarse" class="link link--hover">Registrarse</label>
+        <button class="login__button login__button--hover">Siguiente</button>
+        <label for="mregistrarse" class="login__link login__link--hover">Registrarse</label>
       </div>
     </form>
     
-    <!-- Formulario de Registro -->
-    <form action="#" class="formularioregistro">
-      <div class="registro__container">
-        <h1 class="registro__title">ACE</h1>
-        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="registro__image">
+    <!-- Register Form -->
+    <form action="#" class="login__form login__form--registro">
+      <div class="login__container login__container--registro">
+        <h1 class="login__title">ACE</h1>
+        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
 
-        <div class="input-grouptwo">
-          <input type="text" class="input-group__field" placeholder="Documento de Identidad">
+        <div class="login__input-group">
+          <input type="text" class="login__input" placeholder="Documento de Identidad">
         </div>
 
-        <div class="input-grouptwo">
-          <input type="text" class="input-group__field" placeholder="Elige un Nombre de usuario">
+        <div class="login__input-group">
+          <input type="text" class="login__input" placeholder="Elige un Nombre de usuario">
         </div>
 
-        <div class="input-grouptwo">
-          <input type="password" class="input-group__field" placeholder="Elige una Contraseña">
+        <div class="login__input-group">
+          <input type="password" class="login__input" placeholder="Elige una Contraseña">
+        </div>
+
+        <div class="login__input-group">
+          <input type="text" class="login__input" placeholder="Correo">
+        </div>
+
+        <div class="login__input-group">
+          <input type="number" class="login__input" placeholder="Teléfono">
         </div>
         
-        <button class="button button--hover">Siguiente</button>
-        <label for="miniciarsesion" class="link link--hover">Iniciar Sesión</label>
+        <button class="login__button login__button--hover">Siguiente</button>
+        <label for="miniciarsesion" class="login__link login__link--hover">Iniciar Sesión</label>
       </div>
     </form>
   </div>
-</body>
 </body>
 </html>
