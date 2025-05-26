@@ -113,7 +113,7 @@ body{
 
 .login__link--hover:hover {
   text-decoration: underline;
-  color: white;
+  color: var(--crema-claro);
 }
 
 .login__form--registro {
@@ -142,14 +142,14 @@ body{
 }
 
 .agenda__header {
-  background-color: var(--rosa-pastel);
+  background-color: var(--crema-claro);
 }
 
 .agenda__title {
-  color: var(--crema-claro);
+  color: var(--rojo-vino);
   text-align: center;
-  font-size: 1.3vw;
-  padding: 1vw;
+  font-size: 1.1vw;
+  padding: 0.2vw;
 }
 
 .agenda__nav {
@@ -166,6 +166,7 @@ body{
   font-size: 2vw;
   margin: 2vw;
   cursor: pointer ;
+  margin-top: 4vw;
 }
 
 .agenda__image {
@@ -178,6 +179,9 @@ body{
 .agenda__menu {
   display: flex;
   justify-content: center;
+  gap: 2vw;
+  background-color: var(--rosa-oscuro);
+  
 }
 .agenda__menu-item,.agenda__menu-item--sele {
   color: var(--rojo-vino);
@@ -185,6 +189,8 @@ body{
   padding: 10px;
   font-size: 1.0vw;
   font-weight: bold;
+  margin-bottom: 1vw;
+  
 }
 .agenda__menu-item--sele{
   color: var(--rojo-vino);
@@ -288,4 +294,82 @@ body{
 
 .nuevos-lanzamientos__boton:hover {
   background-color: var(--rosa-pastel);
+}
+
+/* ---------ejemplo caelndar */
+
+/* Bloque principal */
+.calendario {
+  font-family: 'Arial', sans-serif;
+  /* max-width: 800px; */
+  margin: 0 auto;
+  width: 101vw;
+  /* padding: 20px; */
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+}
+
+/* Elementos del bloque calendario */
+.agenda__title--mes {
+  color: var(--rojo-vino);
+  text-align: center;
+  font-size: 1.1vw;
+  padding: 0.2vw;
+}
+
+.calendario__cabecera {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calendario__titulo {
+  font-size: 24px;
+  color: var(--marron-claro);
+}
+
+.calendario__contenedor {
+  display: grid;
+  grid-template-columns: repeat(7, 10vw);
+  gap: 8px;
+  justify-content: center;
+}
+
+.calendario__dia-semana {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: var(--crema-claro);
+  color: var(--marron-claro);
+}
+
+.calendario__dia {
+  min-height: 100px;
+  border: 1px solid var(--marron-claro);
+  padding: 8px;
+  position: relative;
+  background-color: var(--rosa-pastel);
+}
+
+/* Modificadores */
+.calendario__dia--vacio {
+  background-color: var(--crema-claro);
+  border: none;
+}
+
+.calendario__dia--con-cita {
+  background-color: var(--rosa-oscuro);
+}
+
+/* Elementos dentro de los días */
+.calendario__numero-dia {
+  font-weight: bold;
+  color: var(--crema-claro);
+}
+
+.calendario__cita {
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 4px;
+  background-color: var(--rojo-vino);
+  border-radius: 3px;
+  color: var(--crema-claro);
 }
