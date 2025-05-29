@@ -6,71 +6,31 @@
   <title>Ver Agenda</title>
   <link rel="stylesheet" href="styles.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
 </head>
 <body>
-  <div class="calendario">
-    <header class="agenda__header">
-      <h1 class="agenda__title">¡Bienvenidos a ACE!</h1>
-      <div class="agenda__nav">
-        <div class="agenda__search">
-          <i class='bx bx-search-alt-2 agenda__icon'></i>
-        </div>
-        <div class="agenda__logo">
-          <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="agenda__image">
-        </div>
-        <div class="agenda__user">
-          <i class='bx bx-user agenda__icon'></i>
-        </div>
+  <header class="agenda__header">
+    <h1 class="agenda__title">¡Bienvenidos a ACE!</h1>
+    <div class="agenda__nav">
+      <div class="agenda__search">
+        <i class='bx bx-search-alt-2 agenda__icon'></i>
       </div>
-      <div class="agenda__menu">
-        <a href="#" class="agenda__menu-item">Inicio</a>
-        <a href="#" class="agenda__menu-item">Categorias</a>
-        <a href="Agenda.html" class="agenda__menu-item">Agendar</a>
-        <a href="#" class="agenda__menu-item">Ver Agenda</a>
-        <a href="productos.html" class="agenda__menu-item">Productos</a>
+      <div class="agenda__logo">
+        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="agenda__image">
       </div>
-    </header>
-    
-    <div class="calendario__content">
-      <div class="calendario__mes">
-        <h1 class="agenda__title--mes">Mayo</h1>
-      </div>
-      
-    </div>
-    <div class="calendario__contenedor">
-      <!-- Días de la semana -->
-      <div class="calendario__dia-semana">DOM</div>
-      <div class="calendario__dia-semana">LUN</div>
-      <div class="calendario__dia-semana">MAR</div>
-      <div class="calendario__dia-semana">MIÉ</div>
-      <div class="calendario__dia-semana">JUE</div>
-      <div class="calendario__dia-semana">VIE</div>
-      <div class="calendario__dia-semana">SÁB</div>
-      
-      <!-- Celdas vacías para alinear el primer día -->
-      <div class="calendario__dia calendario__dia--vacio"></div>
-      <div class="calendario__dia calendario__dia--vacio"></div>
-      <div class="calendario__dia calendario__dia--vacio"></div>
-      <div class="calendario__dia calendario__dia--vacio"></div>
-      
-      <!-- Días del mes -->
-      <div class="calendario__dia">
-        <span class="calendario__numero-dia">1</span>
-      </div>
-      <div class="calendario__dia">
-        <span class="calendario__numero-dia">2</span>
-      </div>
-      
-      <!-- Días con citas -->
-      <div class="calendario__dia calendario__dia--con-cita">
-        <span class="calendario__numero-dia">5</span>
-        <div class="calendario__cita">cita</div>
-      </div>
-      <div class="calendario__dia calendario__dia--con-cita">
-        <span class="calendario__numero-dia">6</span>
-        <div class="calendario__cita">cita</div>
+      <div class="agenda__user">
+        <i class='bx bx-user agenda__icon'></i>
       </div>
     </div>
-  </div>
+    <div class="agenda__menu">
+      <a href="#" class="agenda__menu-item">Inicio</a>
+      <a href="#" class="agenda__menu-item">Categorias</a>
+      <a href="Agenda.html" class="agenda__menu-item">Agendar</a>
+      <a href="#" class="agenda__menu-item">Ver Agenda</a>
+      <a href="productos.html" class="agenda__menu-item">Productos</a>
+    </div>
+  </header>
+  <div id='calendar'></div>
+  <script src="VerAgenda.js"></script>
 </body>
 </html>

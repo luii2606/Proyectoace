@@ -296,80 +296,38 @@ body{
   background-color: var(--rosa-pastel);
 }
 
-/* ---------ejemplo caelndar */
+/* --------- Ejemplo calendario --------- */
+/* Contenedor principal */
+#calendar {
+  width: 90vw;
+  height: 80vw;
 
-/* Bloque principal */
-.calendario {
-  font-family: 'Arial', sans-serif;
-  /* max-width: 800px; */
-  margin: 0 auto;
-  width: 101vw;
-  /* padding: 20px; */
-  /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+  margin: 2vw auto;
 }
 
-/* Elementos del bloque calendario */
-.agenda__title--mes {
-  color: var(--rojo-vino);
-  text-align: center;
-  font-size: 1.1vw;
-  padding: 0.2vw;
+/* Cabecero (toolbar) */
+.fc .fc-toolbar {
+  background-color: var(--rosa-pastel) !important;
+  padding: 10px !important;
+  border-radius: 8px !important;
 }
 
-.calendario__cabecera {
-  text-align: center;
-  margin-bottom: 20px;
+/* Botones */
+.fc .fc-button {
+  background-color: var(--rosa-oscuro) !important;
+  border: none !important;
+  color: white !important;
+  padding: 4px 8px !important;
 }
 
-.calendario__titulo {
-  font-size: 24px;
-  color: var(--marron-claro);
+/* Días de la semana */
+.fc .fc-col-header-cell {
+  background-color: var(--rojo-vino)!important;
+  color: var(--crema-claro) !important;
+  padding: 8px 0 !important;
 }
 
-.calendario__contenedor {
-  display: grid;
-  grid-template-columns: repeat(7, 10vw);
-  gap: 8px;
-  justify-content: center;
-}
-
-.calendario__dia-semana {
-  text-align: center;
-  font-weight: bold;
-  padding: 10px;
-  background-color: var(--crema-claro);
-  color: var(--marron-claro);
-}
-
-.calendario__dia {
-  min-height: 100px;
-  border: 1px solid var(--marron-claro);
-  padding: 8px;
-  position: relative;
-  background-color: var(--rosa-pastel);
-}
-
-/* Modificadores */
-.calendario__dia--vacio {
-  background-color: var(--crema-claro);
-  border: none;
-}
-
-.calendario__dia--con-cita {
-  background-color: var(--rosa-oscuro);
-}
-
-/* Elementos dentro de los días */
-.calendario__numero-dia {
-  font-weight: bold;
-  color: var(--crema-claro);
-}
-
-.calendario__cita {
-  font-size: 12px;
-  margin-top: 5px;
-  padding: 4px;
-  background-color: var(--rojo-vino);
-  border-radius: 3px;
-  color: var(--crema-claro);
+/* Hover en días */
+.fc .fc-daygrid-day:hover {
+  background-color: var(--crema-claro) !important;
 }
