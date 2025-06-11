@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Agenda ACE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>estilistas Agendar</title>
   <link rel="stylesheet" href="styles.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -36,32 +37,25 @@
       <a href="productos.html" class="agenda__menu-item">Productos</a>
     </div>
   </header>
-  <div class="estilistas">
-    <a href="estilistas-agendar.html" class="estilista estilista--hover">
-      <img src="recursos/Tony Chopper.jpeg" alt="Yesica" class="estilista__foto">
-        <div class="estilista__info">
-            <div class="estilista__nombre">Yesica Espinel</div>
-            <div class="estilista__descripcion">Especialista en coloración</div>
-            <div class="estilista__codigo">ID: 300296385</div>
-        </div>
-    </a>
-    <a href="estilistas-agendar.html" class="estilista estilista--hover">
-      <img src="recursos/Tony Chopper.jpeg" alt="Lilla Landazaba" class="estilista__foto">
-        <div class="estilista__info">
-            <div class="estilista__nombre">Lilia Landazaba</div>
-            <div class="estilista__descripcion">Especialista en coloración</div>
-            <div class="estilista__codigo">ID: 300296385</div>
-        </div>
-    </a>
-    
-    <a href="estilistas-agendar.html" class="estilista estilista--hover">
-      <img src="recursos/Tony Chopper.jpeg" alt="Wendy" class="estilista__foto">
-        <div class="estilista__info">
-            <div class="estilista__nombre">Wendy Paez</div>
-            <div class="estilista__descripcion">Especialista en coloración</div>
-            <div class="estilista__codigo">ID: 300296385</div>
-        </div>
-    </a>
-</div>
+  <!-- <div class="estilista estilista--leter">
+      <div class="estilista__info">
+          <div class="estilista__nombre">Yesica Espinel</div>
+          <div class="estilista__descripcion">Especialista en coloración</div>
+          <div class="estilista__codigo">ID: 300296385</div>
+      </div>
+  </div> -->
+  <div class="contenedor__agendar">
+    <!-- Formulario de Agenda -->
+    <form id="formulario-agenda" class="formulario__agendar">
+      <h2>Agendar Cita</h2>
+      <input type="text" id="nombre" placeholder="Nombre"  class="input__agendar">
+      <input type="datetime-local" id="fecha-hora" class="input__agendar" required>
+      <input type="text" id="categoria" placeholder="Cabello-Piel-Uñas" class="input__agendar">
+      <textarea id="descripcion" placeholder="Descripción" class="input__agendar"></textarea>
+      <button type="submit" class="btn__agendar btn__agendar--hover">Agregar Evento</button>
+    </form>
+    <!-- Calendario -->
+    <div id="calendario"></div>
+  </div>
 </body>
 </html>

@@ -11,6 +11,7 @@
   --rojo-vino: #A6243C;
   --crema-claro: #FFF1EA;
   --marron-claro: #5C3A2E;
+  --negro: #0000;
 }
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -65,7 +66,7 @@ body{
   position: relative;
 }
 
-.login__input {
+.login__input,.input__agendar {
   width: 100%;
   padding: 15px 20px;
   border: none;
@@ -81,7 +82,7 @@ body{
   opacity: 0.7;
 }
 
-.login__button {
+.login__button,.btn__agendar {
   background-color: var(--marron-claro);
   color: var(--crema-claro);
   border: none;
@@ -95,7 +96,7 @@ body{
   font-weight: bold;
 }
 
-.login__button--hover:hover {
+.login__button--hover,.btn__agendar--hover:hover {
   background-color: var(--rosa-pastel);
   transform: translateY(-2px);
   color: var(--marron-claro);
@@ -135,8 +136,15 @@ body{
   display: flex;
   justify-content: center;
 }
+/* .fondo__imagen{
+  width: 50vw;
+  height: 50vw;
+  background-image: url('/recursos/fondo.png');
+  background-position: center; 
+  background-size: cover;
+} */
 
-/* -------------------Bloque: agenda ----------------*/
+/* -------------------Bloque: agenda header----------------*/
 .agenda {
   display: none; 
 }
@@ -180,8 +188,7 @@ body{
   display: flex;
   justify-content: center;
   gap: 2vw;
-  background-color: var(--rosa-oscuro);
-  
+  background-color: var(--rosa-oscuro); 
 }
 .agenda__menu-item,.agenda__menu-item--sele {
   color: var(--rojo-vino);
@@ -196,24 +203,153 @@ body{
   color: var(--rojo-vino);
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  /* border-bottom: 2px solid var(--rojo-vino) */
  }
 .agenda__menu-item:hover{
  color: var(--rojo-vino);
  text-decoration: underline;
  text-decoration-thickness: 2px;
 }
-.veragenda__seccion{
+/* ------------Bloque Agenda Estilistas----------------- */
+.estilistas {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  padding: 30px;
+}
+
+/* Bloque estilista */
+.estilista {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--rosa-pastel);
+  border-left: 4px solid var(--rojo-vino);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.estilista--hover:hover {
+  background-color: var(--crema-claro);
+  transform: translateX(5px);
+}
+
+/* Elemento foto */
+.estilista__foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--rosa-pastel);
+}
+
+/* Contenedor de información */
+.estilista__info {
+  flex: 1;
+}
+
+.estilista__nombre {
+  font-weight: bold;
+  color: var(--marron-claro);
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.estilista__descripcion {
+  color: var(--marron-claro);
+  margin-bottom: 5px;
+}
+
+.estilista__codigo {
+  font-family: 'Courier New', monospace;
+  background-color:var(--crema-claro);
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  color: var(--rojo-vino);
+}
+.estilista--leter{
+  border-radius: 0%;
+  border-left: none;
+  text-align: center;
+}
+
+/*------------ formulario agendar estilistas------------------- */
+
+.contenedor__agendar{
+  display: flex;
+  gap: 20px;
+  max-width: 1700px;
+  margin: 90px;
+  justify-content: center;
+}
+.formulario__agendar{
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  background-color:var(--crema-claro);
+  border-bottom: 5px solid var(--marron-claro); /* Borde inferior grueso */
+  border-top: 1px solid var(--marron-claro);    /* Borde superior fino */
+  border-left: 5px solid var(--marron-claro);   /* Borde izquierdo fino */
+  border-right: 1px solid var(--marron-claro);  /* Borde derecho fino */
+  /* padding: 1.5vw; */
+  /* justify-content: center; */
+}
+
+/* menu desplegable de categorias */
+/* Estilos para el menu desplegable */
+.agenda__menudes {
+  position: relative;
+  display: inline-block;
+}
+
+.agenda__menudes-content {
+  display: none;
+  position: absolute;
+  background-color: var(--crema-claro);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 4px 4px;
+}
+
+.agenda__menudes:hover .agenda__menudes-content {
+  display: block;
+}
+
+.agenda__menudes-item {
+  color: var(--rojo-vino);
+  padding: 10px 13px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+.agenda__menudes-item:hover {
+  text-decoration-thickness: 2px;
+  background-color: var(--rosa-pastel);
+}
+
+.agenda__menu-item--tiene-menudes::after {
+  font-size: 0.8em;
+}
+/* .veragenda__seccion{
   background-color: var(--crema-claro);
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 100vw;
 }
-/* .veragenda__content--tabla{
-  
 
-} */
 
 .veragenda__tabla{
   background-color: var(--crema-claro);
@@ -221,7 +357,7 @@ body{
   height: 10vw;
   border: 1px solid var(--marron-claro);
   margin-top: 5vw;
-}
+} */
   
 
 /*--------------------- Bloque Productos----------------- */
@@ -275,7 +411,6 @@ body{
 }
 
 .nuevos-lanzamientos__boton {
-  /* display: block; */
   width: 2.4vw;
   height: 2.5vw;
   background-color:var(--rosa-oscuro);
@@ -301,7 +436,6 @@ body{
 #calendar {
   width: 90vw;
   height: 80vw;
-
   margin: 2vw auto;
 }
 
