@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="login">
+  <!-- Register Form -->
+    <form action="login.html" class="login__form login__form--registro" id="registro-form" >
+      <div class="login__container login__container--registro">
+        <h1 class="login__title">ACE</h1>
+        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
+    
+        <div class="login__input-group">
+          <input type="text" class="login__input" name="nombre_usuario" placeholder="Elige un Nombre de usuario">
+        </div>
+    
+        <div class="login__input-group">
+          <input type="password" class="login__input" name="contrasena" placeholder="Elige una Contraseña">
+        </div>
+    
+        <div class="login__input-group">
+          <input type="text" class="login__input" name="correo" placeholder="Correo">
+        </div>
+    
+        <div class="login__input-group">
+          <input type="number" class="login__input" name="telefono" placeholder="Teléfono">
+        </div>
+        <select name="id_tipo_usuario" class="login__input">
+          <option value="1">Administrador</option>
+          <option value="2">Cliente</option>
+          <option value="3">Trabajador</option>
+        </select>
+        
+        <button type="submit" class="login__button login__button--hover">Siguiente</button>
+        <label for="miniciarsesion" class="login__link login__link--hover">Iniciar Sesión</label>
+      </div>
+    </form>
+  </div>
+  <script src="datos.js"></script>
+</body>
+</html>

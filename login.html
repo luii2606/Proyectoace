@@ -10,10 +10,8 @@
 <body>
   <!-- Login Section -->
   <div class="login">
-    <input type="radio" id="miniciarsesion" name="radios" class="login__radio login__radio--iniciar" checked>
-    <input type="radio" id="mregistrarse" name="radios" class="login__radio login__radio--registrar">
     <!-- Login Form -->
-    <form action="Agenda.html" class="login__form login__form--inicio">
+    <form action="Agenda.html" class="login__form login__form--inicio" id="login-form" >
       <div class="login__container">
         <h1 class="login__title">ACE</h1>
         <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
@@ -30,42 +28,7 @@
         <label for="mregistrarse" class="login__link login__link--hover">Registrarse</label>
       </div>
     </form>
-    
-    <!-- Register Form -->
-    <form action="Agenda.html" class="login__form login__form--registro">
-      <div class="login__container login__container--registro">
-        <h1 class="login__title">ACE</h1>
-        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
-
-        <div class="login__input-group">
-          <input type="text" class="login__input" placeholder="Elige un Nombre de usuario">
-        </div>
-
-        <div class="login__input-group">
-          <input type="password" class="login__input" placeholder="Elige una Contraseña">
-        </div>
-
-        <div class="login__input-group">
-          <input type="text" class="login__input" placeholder="Correo">
-        </div>
-
-        <div class="login__input-group">
-          <input type="number" class="login__input" placeholder="Teléfono">
-        </div>
-
-        <div class="agenda__menudes">
-          <a href="#" class="agenda__menu-item agenda__menu-item--tiene-menudes">Tipo de Rol ▼</a>
-          <div class="agenda__menudes-content">
-            <a href="#" class="agenda__menudes-item">Administrador</a>
-            <a href="#" class="agenda__menudes-item">Cliente</a>
-            <a href="#" class="agenda__menudes-item">Trabajador</a>
-          </div>
-        </div>
-        
-        <button type="submit" class="login__button login__button--hover">Siguiente</button>
-        <label for="miniciarsesion" class="login__link login__link--hover">Iniciar Sesión</label>
-      </div>
-    </form>
+    <script src="datos.js"></script>
   </div>
 </body>
 </html>

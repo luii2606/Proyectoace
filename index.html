@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Agregar Persona</h2>
+  <input type="text" id="nombre" placeholder="Nombre">
+  <input type="number" id="edad" placeholder="Edad">
+  <button onclick="getPersona()">POST</button>
+
+  <script>
+    function getPersonas() {
+      fetch("http://127.0.0.1:5500/index.html")
+        .then(res => res.json())
+        .then(data => {
+          const lista = document.getElementById("lista");
+          lista.innerHTML = "";
+          data.forEach(p => {
+            lista.innerHTML += `<li>${p.nombre} - ${p.edad} años</li>`;
+          });
+        });
+    }
+
+    function postPersona() {
+      const nombre = document.getElementById("nombre").value;
+      const edad = parseInt(document.getElementById("edad").value);
+
+      fetch("http://127.0.0.1:5500/index.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, edad })
+      }).then(() => getPersonas());
+    }
+
+    getPersonas();
+  </script>
+</body>
+</html>

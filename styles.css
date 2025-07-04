@@ -24,8 +24,7 @@ body{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
-  position: relative;
+  padding: 6vw;
 }
 .login__radio {
   display: none;
@@ -35,14 +34,14 @@ body{
   background-color: var(--rosa-oscuro);
   border-radius: 30px;
   width: 100%;
-  max-width: 400px;
+  max-width: 23vw;
   padding: 60px 70px;
   text-align: center;
 }
 
 .login__container--registro {
-  height: 601px;
-  width: 500px;
+  height: 35vw;
+  width: 50vw;
   padding: 18px 70px;
 }
 
@@ -116,26 +115,6 @@ body{
   text-decoration: underline;
   color: var(--crema-claro);
 }
-
-.login__form--registro {
-  display: none;
-  position: absolute;
-  width: 100%;
-  justify-content: center;
-}
-
-.login__radio--registrar:checked ~ .login__form--registro {
-  display: flex;
-}
-
-.login__radio--registrar:checked ~ .login__form--inicio {
-  display: none;
-}
-
-.login__radio--iniciar:checked ~ .login__form--inicio {
-  display: flex;
-  justify-content: center;
-}
 /* .fondo__imagen{
   width: 50vw;
   height: 50vw;
@@ -143,6 +122,21 @@ body{
   background-position: center; 
   background-size: cover;
 } */
+ /*-------------------- bloque incio --------------------*/
+
+ .title__inicio{
+  color: var(--marron-claro);
+  text-align: center;
+  font-size: 1.1vw;
+  padding: 0.2vw;
+ }
+ .texto__inicio{
+  color: var(--rosa-pastel);
+  text-align: center;
+  font-size: 1.1vw;
+  padding: 0.2vw;
+ }
+ 
 
 /* -------------------Bloque: agenda header----------------*/
 .agenda {
@@ -304,12 +298,12 @@ body{
 
 /* menu desplegable de categorias */
 /* Estilos para el menu desplegable */
-.agenda__menudes {
+/* .agenda__menudes {
   position: relative;
   display: inline-block;
-}
+} */
 
-.agenda__menudes-content {
+/* .agenda__menudes-content {
   display: none;
   position: absolute;
   background-color: var(--crema-claro);
@@ -318,13 +312,13 @@ body{
   left: 50%;
   transform: translateX(-50%);
   border-radius: 0 0 4px 4px;
-}
+} */
 
-.agenda__menudes:hover .agenda__menudes-content {
+/* .agenda__menudes:hover .agenda__menudes-content {
   display: block;
-}
+} */
 
-.agenda__menudes-item {
+/* .agenda__menudes-item {
   color: var(--rojo-vino);
   padding: 10px 13px;
   text-decoration: none;
@@ -341,7 +335,7 @@ body{
 
 .agenda__menu-item--tiene-menudes::after {
   font-size: 0.8em;
-}
+} */
 /* .veragenda__seccion{
   background-color: var(--crema-claro);
   display: flex;
@@ -465,3 +459,4 @@ body{
 .fc .fc-daygrid-day:hover {
   background-color: var(--crema-claro) !important;
 }
+
