@@ -460,3 +460,154 @@ body{
   background-color: var(--crema-claro) !important;
 }
 
+/* ------ administrador---- */
+  body.admin {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background-color: var(--crema-claro);
+  color: var(--texto-oscuro);
+  padding: 20px;
+}
+
+.admin__header {
+  background-color: var(--rosa-pastel);
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.admin__title {
+  margin: 0;
+  font-size: 2em;
+}
+
+.admin__subtitle {
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+.admin__main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.admin__section {
+  background-color: var(--blanco);
+  border-left: 10px solid var(--marron-claro);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.admin__section-title {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: var(--marron-claro);
+}
+
+.form {
+  display: grid;
+  gap: 15px;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form__input {
+  padding: 8px 12px;
+  border: 1px solid var(--marron-claro);
+  border-radius: 8px;
+  background-color: var(--crema-claro);
+}
+
+.form__button {
+  padding: 10px;
+  background-color: var(--marron-claro);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.form__button:hover {
+  background-color: #8d5c54;
+}
+
+    /* -----trabajadores------- */
+    /* body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--crema-claro);
+    } */
+
+    header {
+      background-color: var(--marron-claro);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .contenedor-citas {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .tarjeta-cita {
+      background-color: var(--rosa-pastel);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .info-cita {
+      flex-grow: 1;
+    }
+
+    .info-cita h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--marron-claro);
+    }
+
+    .info-cita p {
+      margin: 0.2rem 0;
+    }
+
+    .estado {
+      font-weight: bold;
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      background-color: white;
+      color: var(--marron-claro);
+      border: 2px solid var(--marron-claro);
+    }
+
+    .estado.realizada {
+      background-color: #c2e8cf;
+      color: green;
+      border: none;
+    }
+
+    .estado.pendiente {
+      background-color: #ffe6cc;
+      color: #cc7a00;
+      border: none;
+    }
+
