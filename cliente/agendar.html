@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar cita</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="cliente">
+  <nav class="cliente__encabezado">
+  <h1 class="cliente__titulo">Bienvenidos</h1>
+  <div>
+    <a href="index.html" class="cliente__boton-salir">Inicio</a>
+    <a href="perfil.html" class="cliente__boton-salir">Perfil</a>
+    <a href="agendar-estilista.html" class="cliente__boton-salir">Agendar</a>
+    <a href="productos.html" class="cliente__boton-salir">Productos</a>
+  </div>
+  
+</nav>
+  <main class="cliente__main">
+    <section class="cliente__cuadro">
+      <h2 class="cuadro__titulo">Agendar Cita</h2>
+      <form class="formulario">
+        <input type="hidden" id="id-trabajador" name="id_trabajador">
+        <input type="hidden" name="estilista" id="campo-estilista" />
+        <label class="formulario__label">Fecha:
+          <input type="date" class="formulario__input" />
+        </label>
+
+        <label class="formulario__label">Hora:
+          <input type="time" class="formulario__input" />
+        </label>
+
+        <label class="formulario__label">Clasificación:
+  <select id="select-clasificacion" class="formulario__input">
+    <option value="">Selecciona...</option>
+  </select>
+</label>
+
+<label class="formulario__label">Servicio:
+  <select id="select-servicio" class="formulario__input">
+    <option value="">Selecciona una clasificación primero...</option>
+  </select>
+</label>
+
+        <div class="formulario__grupo">
+          <label class="formulario__label">Productos opcionales:</label>
+          <div id="lista-productos-form" class="formulario__checkbox-contenedor">
+    <!-- Aquí se cargan los productos como checkboxes -->
+         </div>
+        </div>
+        <a href="productos.html" class="mensaje__boton">Ver productos</a>
+        <button type="submit" class="formulario__boton">Agendar</button>
+      </form>
+      <script src="agendar-estilistas.js"></script>
+    </section>
+  </main>
+</body>
+</html>

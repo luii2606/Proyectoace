@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Productos</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="admin">
+  <header class="admin__header">
+    <h1 class="admin__title">Administrador</h1>
+    <p class="admin__subtitle">Bienvenida, Valentina </p>
+  </header>
+  <!-- navegador -->
+  <nav class="admin__nav">
+  <ul class="admin__nav-lista">
+    <li class="admin__nav-item"><a class="admin__nav-enlace" href="trabajadores.html">Registrar Trabajadores</a></li>
+    <li class="admin__nav-item"><a class="admin__nav-enlace" href="productos.html">Registrar Productos</a></li>
+  </ul>
+</nav>
+  <!-- <header class="encabezado">
+    <h1 class="encabezado__titulo">Gestión de Productos</h1>
+  </header> -->
+
+  <main class="productos">
+    <section class="productos__formulario">
+      <h2 class="formulario__titulo">Registrar / Editar Producto</h2>
+      <form id="form-producto" class="formulario">
+        <input type="hidden" id="id_producto" />
+
+        <label class="formulario__label">Nombre:
+          <input type="text" id="nombre_producto" class="formulario__input" required />
+        </label>
+
+        <label class="formulario__label">Descripción:
+          <textarea id="descripcion" class="formulario__input"></textarea>
+        </label>
+
+        <label class="formulario__label">Precio:
+          <input type="number" step="0.01" id="precio" class="formulario__input" required />
+        </label>
+
+        <button type="submit" class="formulario__boton">Guardar</button>
+      </form>
+    </section>
+
+<section class="productos">
+  <h2 class="productos__titulo">Lista de productos</h2>
+  <table class="productos__tabla">
+    <thead class="productos__encabezado">
+      <tr class="productos__fila productos__fila--encabezado">
+        <th class="productos__celda">ID</th>
+        <th class="productos__celda">Nombre</th>
+        <th class="productos__celda">Descripción</th>
+        <th class="productos__celda">Precio</th>
+        <th class="productos__celda">Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-productos" class="productos__cuerpo">
+      <!-- Aquí van las filas generadas por JS -->
+    </tbody>
+  </table>
+</section>
+
+
+  </main>
+
+  <script src="productos.js"></script>
+</body>
+</html>

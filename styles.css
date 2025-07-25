@@ -7,17 +7,20 @@
 
 :root {
   --rosa-pastel: #F9B7C3;
+  --rosa-pastel-oscuro: #e7a4be;
   --rosa-oscuro: #D94A59;
   --rojo-vino: #A6243C;
   --crema-claro: #FFF1EA;
   --marron-claro: #5C3A2E;
   --negro: #0000;
+  --blanco: #ffff; 
+  --gris: #444;
 }
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* --------------Bloque: login-------------- */
+/* --------------Bloque: login y registro-------------- */
 .login {
   background-color: var(--rosa-pastel);
   display: flex;
@@ -115,13 +118,367 @@ body{
   text-decoration: underline;
   color: var(--crema-claro);
 }
-/* .fondo__imagen{
-  width: 50vw;
-  height: 50vw;
-  background-image: url('/recursos/fondo.png');
-  background-position: center; 
-  background-size: cover;
-} */
+
+/* ------------------ BLOQUE Cliente ------------------ */
+.cliente {
+  background-color: var(--crema-claro);
+  min-height: 100vh;
+  padding: 2vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado */
+.cliente__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--rosa-pastel);
+  padding: 1.5vw 3vw;
+  border-radius: 1vw;
+  margin-bottom: 2vw;
+}
+
+.cliente__titulo {
+  font-size: 2vw;
+  color: var(--blanco);
+  font-weight: bold;
+}
+
+.cliente__boton-salir {
+  background-color: var(--marron-claro);
+  color: var(--crema-claro);
+  border: none;
+  padding: 0.8vw 1.5vw;
+  font-size: 1vw;
+  border-radius: 2vw;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cliente__boton-salir--hover {
+  background-color: var(--rosa-pastel);
+  color: var(--marron-claro);
+}
+
+/* Contenedor general */
+.cliente__contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2vw;
+}
+
+/* Secciones */
+.cliente__seccion {
+  background-color: var(--blanco);
+  border: 2px solid var(--rosa-pastel);
+  border-radius: 1vw;
+  padding: 2vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.cliente__seccion-titulo {
+  font-size: 1.5vw;
+  color: var(--rojo-vino);
+  margin-bottom: 1vw;
+  border-bottom: 1px solid var(--rosa-oscuro);
+  padding-bottom: 0.5vw;
+}
+
+/* Datos de perfil */
+.cliente__dato {
+  font-size: 1vw;
+  color: var(--marron-claro);
+  margin-bottom: 0.5vw;
+}
+
+.cliente__main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cliente__cuadro {
+  background-color: var(--blanco);
+  border: 1px solid var(--rosa-pastel);
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.cuadro__titulo {
+  font-size: 1.4rem;
+  color: var(--rojo-vino);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--rojo-vino);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formulario__label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #4e3e3e;
+}
+
+.formulario__input {
+  padding: 10px;
+  border: 1px solid var(--rosa-pastel);
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.formulario__boton {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+/* Lista de productos */
+.cliente__lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cliente__item {
+  background-color: var(--crema-claro);
+  padding: 1vw;
+  margin-bottom: 1vw;
+  border-left: 4px solid var(--rojo-vino);
+  border-radius: 1vw;
+  font-size: 1vw;
+  color: var(--marron-claro);
+}
+/* productos vista cliente */
+.productos {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 2rem;
+  background-color: var(--crema-claro);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px var(--sombra-suave);
+  text-align: center;
+}
+
+.productos__titulo {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--marron-oscuro);
+}
+
+.productos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.productos {
+  padding: 2rem;
+  background-color: var(--crema-claro);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.productos__titulo {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--marron-oscuro);
+  margin-bottom: 2rem;
+}
+
+.productos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.productos {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.productos__titulo {
+  font-size: 2rem;
+  color: var(--marron-claro);
+  margin-bottom: 2rem;
+}
+
+.productos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.productos__item {
+  background-color: var(--blanco);
+  border: 2px solid var(--rosa-pastel);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.productos__item:hover {
+  transform: scale(1.02);
+}
+
+.productos__nombre {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--marron-claro);
+}
+
+.productos__descripcion {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--gris);
+}
+
+.productos__precio {
+  font-weight: bold;
+  color: var(--rosa-oscuro);
+  margin-bottom: 0.8rem;
+}
+
+.productos__cantidad-label {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+.productos__cantidad-input {
+  width: 60px;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 6px;
+  border: 1px solid var(--crema-claro);
+}
+
+.productos__boton {
+  background-color: var(--rosa-pastel);
+  color: var(--blanco);
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.productos__volver {
+  background-color: var(--rosa-pastel);
+  color: var(--blanco);
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+/* botón de agrgar productos a la cita */
+.productos__agregar{
+   background-color: var(--rosa-oscuro);
+  color: var(--blanco);
+  border: none;
+  padding: 0.2rem 2rem;
+  font-size: 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.productos__boton:hover {
+  background-color: var(--rosa-pastel-oscuro);
+}
+.productos__volver:hover {
+  background-color: var(--rosa-pastel-oscuro);
+}
+
+
+/* bloque de productos cliente */
+.productos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.producto {
+  border: 1px solid var(--marron-claro);
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--crema-claro);
+}
+
+/* productos prueba cliente */
+.formulario__productos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+.formulario__checkbox-label {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mensaje__boton{
+  text-align: center;
+  /* text-decoration: none; */
+  color: var(--rojo-vino);
+  font-weight: bold;
+  
+}
+/* fromulario checkbox productos en el formulario cita agendar */
+.formulario__checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--marron-claro); /* O el color que uses para texto */
+}
+
+.formulario__checkbox input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2); /* Hace el checkbox un poco más grande */
+  accent-color: var(--rosa-pastel); /* Si tu navegador lo soporta */
+}
+
+.formulario__cantidad {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid var(--marron-claro);
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: var(--crema-claro);
+  color: var(--marron-claro);
+}
+
+
+
+
  /*-------------------- bloque incio --------------------*/
 
  .title__inicio{
@@ -138,76 +495,11 @@ body{
  }
  
 
-/* -------------------Bloque: agenda header----------------*/
-.agenda {
-  display: none; 
-}
-
-.agenda__header {
-  background-color: var(--crema-claro);
-}
-
-.agenda__title {
-  color: var(--rojo-vino);
-  text-align: center;
-  font-size: 1.1vw;
-  padding: 0.2vw;
-}
-
-.agenda__nav {
-  width: 100vw;
-  height: 10vw;
-  background-color: var(--rosa-oscuro);
-  display: flex;
-  justify-content: space-around;
-}
-
-.agenda__search,
-.agenda__user {
-  color: var(--rojo-vino);
-  font-size: 2vw;
-  margin: 2vw;
-  cursor: pointer ;
-  margin-top: 4vw;
-}
-
-.agenda__image {
-  width: 5vw;
-  height: 5vw;
-  border-radius: 50%;
-  margin: 2vw;
-}
-
-.agenda__menu {
-  display: flex;
-  justify-content: center;
-  gap: 2vw;
-  background-color: var(--rosa-oscuro); 
-}
-.agenda__menu-item,.agenda__menu-item--sele {
-  color: var(--rojo-vino);
-  text-decoration: none;
-  padding: 10px;
-  font-size: 1.0vw;
-  font-weight: bold;
-  margin-bottom: 1vw;
-  
-}
-.agenda__menu-item--sele{
-  color: var(--rojo-vino);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
- }
-.agenda__menu-item:hover{
- color: var(--rojo-vino);
- text-decoration: underline;
- text-decoration-thickness: 2px;
-}
 /* ------------Bloque Agenda Estilistas----------------- */
 .estilistas {
   max-width: 800px;
   margin: 0 auto;
-  background-color: white;
+  background-color:var(--blanco);
   border-radius: 10px;
   box-shadow: var(--sombra);
   padding: 30px;
@@ -258,7 +550,7 @@ body{
   margin-bottom: 5px;
 }
 
-.estilista__codigo {
+.estilista__telefono {
   font-family: 'Courier New', monospace;
   background-color:var(--crema-claro);
   padding: 5px 10px;
@@ -271,91 +563,8 @@ body{
   border-left: none;
   text-align: center;
 }
-
-/*------------ formulario agendar estilistas------------------- */
-
-.contenedor__agendar{
-  display: flex;
-  gap: 20px;
-  max-width: 1700px;
-  margin: 90px;
-  justify-content: center;
-}
-.formulario__agendar{
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  background-color:var(--crema-claro);
-  border-bottom: 5px solid var(--marron-claro); /* Borde inferior grueso */
-  border-top: 1px solid var(--marron-claro);    /* Borde superior fino */
-  border-left: 5px solid var(--marron-claro);   /* Borde izquierdo fino */
-  border-right: 1px solid var(--marron-claro);  /* Borde derecho fino */
-  /* padding: 1.5vw; */
-  /* justify-content: center; */
-}
-
-/* menu desplegable de categorias */
-/* Estilos para el menu desplegable */
-/* .agenda__menudes {
-  position: relative;
-  display: inline-block;
-} */
-
-/* .agenda__menudes-content {
-  display: none;
-  position: absolute;
-  background-color: var(--crema-claro);
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0 0 4px 4px;
-} */
-
-/* .agenda__menudes:hover .agenda__menudes-content {
-  display: block;
-} */
-
-/* .agenda__menudes-item {
-  color: var(--rojo-vino);
-  padding: 10px 13px;
-  text-decoration: none;
-  display: block;
-  font-size: 0.9vw;
-  font-weight: bold;
-  text-align: center;
-}
-
-.agenda__menudes-item:hover {
-  text-decoration-thickness: 2px;
-  background-color: var(--rosa-pastel);
-}
-
-.agenda__menu-item--tiene-menudes::after {
-  font-size: 0.8em;
-} */
-/* .veragenda__seccion{
-  background-color: var(--crema-claro);
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  height: 100vw;
-}
-
-
-.veragenda__tabla{
-  background-color: var(--crema-claro);
-  width: 50vw;
-  height: 10vw;
-  border: 1px solid var(--marron-claro);
-  margin-top: 5vw;
-} */
-  
-
 /*--------------------- Bloque Productos----------------- */
-.nuevos__lanzamientoscontent{
+ .nuevos__lanzamientoscontent{
  display: flex;
  flex-wrap: wrap;
  padding: 2vw;
@@ -370,7 +579,7 @@ body{
   border-bottom: 5px solid var(--marron-claro); /* Borde inferior grueso */
   border-top: 1px solid var(--marron-claro);    /* Borde superior fino */
   border-left: 5px solid var(--marron-claro);   /* Borde izquierdo fino */
-  border-right: 1px solid var(--marron-claro);  /* Borde derecho fino */
+   border-right: 1px solid var(--marron-claro);  /*Borde derecho fino */
   padding: 1.5vw;
   border-radius: 3vw;
 }
@@ -423,52 +632,51 @@ body{
 
 .nuevos-lanzamientos__boton:hover {
   background-color: var(--rosa-pastel);
-}
+} */
 
 /* --------- Ejemplo calendario --------- */
 /* Contenedor principal */
-#calendar {
+/* #calendar {
   width: 90vw;
   height: 80vw;
   margin: 2vw auto;
-}
+} */
 
 /* Cabecero (toolbar) */
-.fc .fc-toolbar {
+/* .fc .fc-toolbar {
   background-color: var(--rosa-pastel) !important;
   padding: 10px !important;
   border-radius: 8px !important;
-}
+} */
 
 /* Botones */
-.fc .fc-button {
+/* .fc .fc-button {
   background-color: var(--rosa-oscuro) !important;
   border: none !important;
   color: white !important;
   padding: 4px 8px !important;
-}
+} */
 
 /* Días de la semana */
-.fc .fc-col-header-cell {
+/* .fc .fc-col-header-cell {
   background-color: var(--rojo-vino)!important;
   color: var(--crema-claro) !important;
   padding: 8px 0 !important;
-}
+} */
 
 /* Hover en días */
-.fc .fc-daygrid-day:hover {
+/* .fc .fc-daygrid-day:hover {
   background-color: var(--crema-claro) !important;
-}
+} */
 
-/* ------ administrador---- */
-  body.admin {
-  font-family: 'Segoe UI', sans-serif;
+/* ------ BLOQUE  Administrador---- */
+body.admin {
   margin: 0;
   background-color: var(--crema-claro);
   color: var(--texto-oscuro);
   padding: 20px;
 }
-
+/* encabezado de Administrador */
 .admin__header {
   background-color: var(--rosa-pastel);
   padding: 20px;
@@ -531,7 +739,7 @@ body{
 .form__button {
   padding: 10px;
   background-color: var(--marron-claro);
-  color: white;
+  color: var(--blanco);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -539,19 +747,196 @@ body{
 }
 
 .form__button:hover {
-  background-color: #8d5c54;
+  background-color: #8d5c54; /*agregaaaaaaaaaaaaaaaarcoloooooooooooooooor*/
+}
+.admin__nav {
+  background-color: var(--crema-claro);
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-    /* -----trabajadores------- */
-    /* body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--crema-claro);
-    } */
+.admin__nav-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
 
+.admin__nav-item {
+  
+}
+
+.admin__nav-enlace {
+  text-decoration: none;
+  color: var(--marron-claro);
+  font-weight: bold;
+  background-color: var(--rosa-pastel);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.admin__nav-enlace:hover {
+  background-color: var(--rosa-pastel-hover);
+}
+
+/* tabla de trabajadores creados */
+.admin__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: var(--crema-claro);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin__tabla-cabecera {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+}
+
+.admin__tabla-fila:nth-child(even) {
+  background-color: var(--crema-claro);
+}
+
+.admin__tabla-encabezado,
+.admin__tabla-celda {
+  padding: 1rem;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.admin__tabla-celda {
+  color: #333; /*agregaaaaaaaaaaaaaaaaaaaaaarcolor*/
+}
+
+.admin__tabla-acciones {
+  display: flex;
+  gap: 0.10rem;
+}
+.admin__tabla-cuerpo{
+ /* campos de trabajadores creados */
+}
+.tabla__boton {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.tabla__boton--editar {
+  background-color: var(--rosa-pastel);
+  color: var(--marron-oscuro);
+}
+
+.tabla__boton--editar:hover {
+  background-color: var(--rosa-pastel);
+  transform: scale(1.05);
+}
+
+.tabla__boton--eliminar {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+}
+
+.tabla__boton--eliminar:hover {
+  background-color: #8b5e55;
+  transform: scale(1.05);
+}
+
+/* tabla productos Administradores */
+/* Contenedor principal */
+.productos {
+  padding: 2rem;
+  text-align: center;
+}
+
+.productos__titulo {
+  font-size: 2rem;
+  color: var(--marron-claro);
+  margin-bottom: 1.5rem;
+}
+
+/* Tabla */
+.productos__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--crema-claro);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Encabezado */
+.productos__encabezado {
+  background-color: var(--rosa-pastel);
+}
+
+.productos__fila--encabezado .productos__celda {
+  font-weight: bold;
+  padding: 1rem;
+  color: #333;
+  border: 1px solid var(--marron-claro);
+}
+
+/* Filas del cuerpo */
+.productos__fila {
+  border-bottom: 1px solid var(--crema-claro);
+}
+
+.productos__celda {
+  padding: 1rem;
+  text-align: center;
+  color: #444;
+}
+
+/* Alternancia de color en filas */
+.productos__fila:nth-child(even) {
+  background-color: var(--blanco);
+}
+
+.productos__row{
+    border: 1px solid var(--marron-claro);
+    padding: 1rem;
+}
+/* Acciones (botones editar/eliminar) */
+.productos__boton {
+  padding: 0.5rem 1rem;
+  margin: 0 0.3rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+
+.productos__boton--editar {
+  background-color: var(--rosa-pastel);
+  color: #444;
+  font-size: 1rem;
+}
+
+.productos__boton--eliminar {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+  font-size: 1rem;
+}
+
+
+/* ----- Bloque-trabajadores------- */
     header {
-      background-color: var(--marron-claro);
-      color: white;
+      background-color: var(--rosa-pastel);
+      color: var(--blanco);
       padding: 1rem;
       text-align: center;
     }
@@ -564,10 +949,11 @@ body{
       max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
+      background-color: var(--marron-claro);
     }
 
     .tarjeta-cita {
-      background-color: var(--rosa-pastel);
+      background-color: var(--crema-claro);
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 1rem 1.5rem;
@@ -594,19 +980,19 @@ body{
       font-weight: bold;
       padding: 0.3rem 0.8rem;
       border-radius: 8px;
-      background-color: white;
+      background-color: var(--blanco);
       color: var(--marron-claro);
       border: 2px solid var(--marron-claro);
     }
 
     .estado.realizada {
-      background-color: #c2e8cf;
+      background-color: var(--blanco);
       color: green;
       border: none;
     }
 
     .estado.pendiente {
-      background-color: #ffe6cc;
+      background-color: var(--crema-claro);
       color: #cc7a00;
       border: none;
     }

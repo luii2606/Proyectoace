@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>trabajadores</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="admin">
+
+  <header class="admin__header">
+    <h1 class="admin__title">Administrador</h1>
+    <p class="admin__subtitle">Bienvenida, Valentina </p>
+  </header>
+  <!-- navegador -->
+  <nav class="admin__nav">
+  <ul class="admin__nav-lista">
+    <li class="admin__nav-item"><a class="admin__nav-enlace" href="trabajadores.html">Registrar Trabajadores</a></li>
+    <li class="admin__nav-item"><a class="admin__nav-enlace" href="productos.html">Registrar Productos</a></li>
+  </ul>
+</nav>
+
+  <main class="admin__main">
+    <section class="admin__section admin__section--trabajadores">
+      <h2 class="admin__section-title">Registrar Trabajador</h2>
+      <form class="form form--trabajador" id="form-trabajador">
+        <div class="form__group">
+          <label class="form__label" for="nombre-trabajador">Nombre:</label>
+          <input class="form__input" type="text" id="nombre-trabajador" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="correo-trabajador">Correo:</label>
+          <input class="form__input" type="email" id="correo-trabajador" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="usuario-trabajador">Usuario:</label>
+          <input class="form__input" type="text" id="usuario-trabajador" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="usuario-trabajador">Telefono:</label>
+          <input class="form__input" type="text" id="telefono-trabajador" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="rol-trabajador">Rol:</label>
+          <input type="text" class="form__input" id="rol-trabajador" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="contrasena-trabajador">Contraseña:</label>
+          <input class="form__input" type="password" id="contrasena-trabajador" required />
+        </div>
+        <button class="form__button" type="submit">Registrar Trabajador</button>
+      </form>
+      <script src="trabajadores.js"></script>
+    </section>
+  <section class="admin__seccion admin__seccion--lista">
+  <h2 class="admin__seccion-titulo">Trabajadores Registrados</h2>
+  <table class="admin__tabla" id="tabla-trabajadores">
+    <thead class="admin__tabla-cabecera">
+      <tr class="admin__tabla-fila">
+        <th class="admin__tabla-encabezado">ID</th>
+        <th class="admin__tabla-encabezado">Usuario</th>
+        <th class="admin__tabla-encabezado">Correo</th>
+        <th class="admin__tabla-encabezado">Teléfono</th>
+        <th class="admin__tabla-encabezado">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="admin__tabla-cuerpo" id="tbody-trabajadores">
+      <!-- Filas dinámicas -->
+    </tbody>
+  </table>
+</section>
+
+  </main>
+</html>
