@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyecto ACE</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -14,7 +14,7 @@
     <form action="Agenda.html" class="login__form login__form--inicio" id="login-form">
       <div class="login__container">
         <h1 class="login__title">ACE</h1>
-        <img src="recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
+        <img src="../recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
         
         <div class="login__input-group">
           <input type="text" class="login__input" name="nombre_usuario" placeholder="Nombre de usuario">
@@ -25,9 +25,10 @@
         </div>
         
         <button type="submit" class="login__button login__button--hover">Siguiente</button>
-        <label for="mregistrarse" class="login__link login__link--hover">Registrarse</label>
+       <a href="../Registro/registro.html" class="login__link login__link--hover">Registrarse</a>
       </div>
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="login.js"></script>
   </div>
 </body>

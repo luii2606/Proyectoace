@@ -307,7 +307,7 @@ body{
   gap: 1.5rem;
 }
 
-.productos {
+.productos,.servicios {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -412,73 +412,6 @@ body{
 .productos__volver:hover {
   background-color: var(--rosa-pastel-oscuro);
 }
-
-
-/* bloque de productos cliente */
-.productos__lista {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.producto {
-  border: 1px solid var(--marron-claro);
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: var(--crema-claro);
-}
-
-/* productos prueba cliente */
-.formulario__productos {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 0.5rem;
-}
-
-.formulario__checkbox-label {
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.mensaje__boton{
-  text-align: center;
-  /* text-decoration: none; */
-  color: var(--rojo-vino);
-  font-weight: bold;
-  
-}
-/* fromulario checkbox productos en el formulario cita agendar */
-.formulario__checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  gap: 10px;
-  font-size: 16px;
-  color: var(--marron-claro); /* O el color que uses para texto */
-}
-
-.formulario__checkbox input[type="checkbox"] {
-  margin-right: 8px;
-  transform: scale(1.2); /* Hace el checkbox un poco más grande */
-  accent-color: var(--rosa-pastel); /* Si tu navegador lo soporta */
-}
-
-.formulario__cantidad {
-  width: 60px;
-  padding: 5px;
-  border: 1px solid var(--marron-claro);
-  border-radius: 6px;
-  font-size: 15px;
-  background-color: var(--crema-claro);
-  color: var(--marron-claro);
-}
-
-
-
-
  /*-------------------- bloque incio --------------------*/
 
  .title__inicio{
@@ -563,113 +496,8 @@ body{
   border-left: none;
   text-align: center;
 }
-/*--------------------- Bloque Productos----------------- */
- .nuevos__lanzamientoscontent{
- display: flex;
- flex-wrap: wrap;
- padding: 2vw;
- background-color: var(--crema-claro);
-}
-.nuevos-lanzamientos {
-  width: 18vw;
-  height: 22vw;
-  margin: 2.5vw;
-  margin-top: 2vw;
-  background-color:var(--crema-claro);
-  border-bottom: 5px solid var(--marron-claro); /* Borde inferior grueso */
-  border-top: 1px solid var(--marron-claro);    /* Borde superior fino */
-  border-left: 5px solid var(--marron-claro);   /* Borde izquierdo fino */
-   border-right: 1px solid var(--marron-claro);  /*Borde derecho fino */
-  padding: 1.5vw;
-  border-radius: 3vw;
-}
 
-.nuevos-lanzamientos__producto {
-  margin-top: -2vw;
-}
-.nuevos-lanzamientos__fotocon{
-  width: 9vw;
-  height: 9vw;
-  margin-bottom: 7vw;
-  margin-top: -1.5vw;
-}
-.nuevos-lanzamientos__foto{
-  width: 16vw;
-  height: 14vw;
-}
-.nuevos-lanzamientos__separador {
-  border-top: 1px solid var(--crema-claro);
-  margin: 20px 0;
-}
-.nuevos-lanzamientos__titulo-tarjeta {
-  font-size: 1.2vw;
-  font-weight: bold;
-  margin-bottom: 0.1vw;
-  margin-top: -2vw;
-}
-
-.nuevos-lanzamientos__precio {
-  font-size:1.3vw;
-  color: var(--marron-claro);
-}
-
-.nuevos-lanzamientos__boton {
-  width: 2.4vw;
-  height: 2.5vw;
-  background-color:var(--rosa-oscuro);
-  color: var(--crema-claro);
-  border: none;
-  border-radius: 0.6vw;
-  cursor: pointer;
-  font-size: 1.5vw;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  margin-left: 12vw;
-}
-.nuevos-lanzamientos__contentbo{
-  margin-top: -1vw ;
-}
-
-.nuevos-lanzamientos__boton:hover {
-  background-color: var(--rosa-pastel);
-} */
-
-/* --------- Ejemplo calendario --------- */
-/* Contenedor principal */
-/* #calendar {
-  width: 90vw;
-  height: 80vw;
-  margin: 2vw auto;
-} */
-
-/* Cabecero (toolbar) */
-/* .fc .fc-toolbar {
-  background-color: var(--rosa-pastel) !important;
-  padding: 10px !important;
-  border-radius: 8px !important;
-} */
-
-/* Botones */
-/* .fc .fc-button {
-  background-color: var(--rosa-oscuro) !important;
-  border: none !important;
-  color: white !important;
-  padding: 4px 8px !important;
-} */
-
-/* Días de la semana */
-/* .fc .fc-col-header-cell {
-  background-color: var(--rojo-vino)!important;
-  color: var(--crema-claro) !important;
-  padding: 8px 0 !important;
-} */
-
-/* Hover en días */
-/* .fc .fc-daygrid-day:hover {
-  background-color: var(--crema-claro) !important;
-} */
-
-/* ------ BLOQUE  Administrador---- */
+/* ------------------BLOQUE  Administrador-------------------*/
 body.admin {
   margin: 0;
   background-color: var(--crema-claro);
@@ -699,9 +527,12 @@ body.admin {
   flex-direction: column;
   gap: 40px;
   margin-top: 30px;
+  
 }
 
 .admin__section {
+ justify-content: center;
+  /* max-width: 1200px; */
   background-color: var(--blanco);
   border-left: 10px solid var(--marron-claro);
   padding: 20px;
@@ -766,11 +597,6 @@ body.admin {
   justify-content: center;
   gap: 2rem;
 }
-
-.admin__nav-item {
-  
-}
-
 .admin__nav-enlace {
   text-decoration: none;
   color: var(--marron-claro);
@@ -853,147 +679,159 @@ body.admin {
   background-color: #8b5e55;
   transform: scale(1.05);
 }
+/* ----- Bloque-trabajadores------- */
 
-/* tabla productos Administradores */
-/* Contenedor principal */
-.productos {
-  padding: 2rem;
-  text-align: center;
+    /* citaaaaas */
+.citas-container {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
 }
 
-.productos__titulo {
-  font-size: 2rem;
-  color: var(--marron-claro);
-  margin-bottom: 1.5rem;
+.cita-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--rosa-pastel);
+    border-radius: 20px; /* Más cuadrado */
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    margin: 15px;
+     width: 400px;      /* ancho fijo */
+    height: 300px;
+    flex-direction: column;
+    text-align: center;
 }
 
-/* Tabla */
-.productos__tabla {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--crema-claro);
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  overflow: hidden;
+.cita-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    margin-bottom: 5px;
 }
 
-/* Encabezado */
-.productos__encabezado {
-  background-color: var(--rosa-pastel);
+.cita-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
-.productos__fila--encabezado .productos__celda {
-  font-weight: bold;
-  padding: 1rem;
-  color: #333;
-  border: 1px solid var(--marron-claro);
+.cita-info p {
+    margin: 3px 0;
 }
 
-/* Filas del cuerpo */
-.productos__fila {
-  border-bottom: 1px solid var(--crema-claro);
+.cita-tel {
+    display: inline-block;
+    background-color: #fce4ec;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.85em;
 }
-
-.productos__celda {
-  padding: 1rem;
-  text-align: center;
-  color: #444;
-}
-
-/* Alternancia de color en filas */
-.productos__fila:nth-child(even) {
-  background-color: var(--blanco);
-}
-
-.productos__row{
-    border: 1px solid var(--marron-claro);
-    padding: 1rem;
-}
-/* Acciones (botones editar/eliminar) */
-.productos__boton {
-  padding: 0.5rem 1rem;
-  margin: 0 0.3rem;
+.btn-pagar,.btn-cancelar{
+   background-color: var(--rosa-oscuro);
+  color: var(--blanco);
   border: none;
-  border-radius: 5px;
+  padding: 0.2rem 2rem;
+  font-size: 14px;
+  border-radius: 7px;
   cursor: pointer;
-  font-weight: bold;
+  text-decoration: none;
+  margin: 5px;
   
 }
-
-.productos__boton--editar {
-  background-color: var(--rosa-pastel);
-  color: #444;
-  font-size: 1rem;
-}
-
-.productos__boton--eliminar {
-  background-color: var(--marron-claro);
+.btn-completar,.btn-eliminar{
+   background-color: var(--rosa-oscuro);
   color: var(--blanco);
-  font-size: 1rem;
+  border: none;
+  padding: 0.2rem 2rem;
+  font-size: 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 5px;
+  
+}
+.cita-cardt{
+  display: flex;
+    align-items: center;
+    background-color: var(--crema-claro);
+    border-radius: 20px; /* Más cuadrado */
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    margin: 15px;
+     width: 400px;      /* ancho fijo */
+    height: 300px;
+    flex-direction: column;
+    text-align: center;
 }
 
 
-/* ----- Bloque-trabajadores------- */
-    header {
+/* bloque de trabajadores */
+  header {
       background-color: var(--rosa-pastel);
       color: var(--blanco);
       padding: 1rem;
       text-align: center;
     }
 
-    h1 {
-      margin: 0;
-    }
+/* Facturas */
+#contenedor-reservas {
+  max-width: 700px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
 
-    .contenedor-citas {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: var(--marron-claro);
-    }
+.factura-item {
+  background: var(--blanco);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
 
-    .tarjeta-cita {
-      background-color: var(--crema-claro);
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.factura-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-    .info-cita {
-      flex-grow: 1;
-    }
+.factura-item h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
 
-    .info-cita h3 {
-      margin: 0 0 0.5rem 0;
-      color: var(--marron-claro);
-    }
+.factura-item p {
+  font-size: 15px;
+  margin: 8px 0;
+}
 
-    .info-cita p {
-      margin: 0.2rem 0;
-    }
+.factura-item hr {
+  margin-top: 15px;
+  border: none;
+  border-top: 1px solid #eee;
+}
 
-    .estado {
-      font-weight: bold;
-      padding: 0.3rem 0.8rem;
-      border-radius: 8px;
-      background-color: var(--blanco);
-      color: var(--marron-claro);
-      border: 2px solid var(--marron-claro);
-    }
+.btn-imprimir {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 12px;
+  background-color: var(--rojo-vino);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
 
-    .estado.realizada {
-      background-color: var(--blanco);
-      color: green;
-      border: none;
-    }
+.btn-imprimir:hover {
+  background-color: #2980b9;
+}
 
-    .estado.pendiente {
-      background-color: var(--crema-claro);
-      color: #cc7a00;
-      border: none;
-    }
+
+
+
 
