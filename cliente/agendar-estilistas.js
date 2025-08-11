@@ -1,16 +1,16 @@
-//trabajadores insertados en la vista del cliente
 document.addEventListener("DOMContentLoaded", async () => {
-  const contenedor = document.getElementById("estilistas-contenedor");
+  const contenedor = document.getElementById("estilistas-contenedor"); // Contenedor donde se mostrarán las tarjetas
 
   try {
-    // ✅ Cambiado para traer también el nombre_rol
+    // Traemos todos los trabajadores con su rol desde la API
     const response = await fetch("http://localhost:8080/pruebaApi/api/usuarios/trabajadores-rol");
     const trabajadores = await response.json();
 
+    // Por cada trabajador, crear una tarjeta con enlace a la página de agendar, pasando datos en URL
     trabajadores.forEach(trabajador => {
       const tarjeta = document.createElement("a");
       tarjeta.href = `agendar.html?nombre=${encodeURIComponent(trabajador.nombre_usuario)}&id=${trabajador.id_usuario}`;
-      tarjeta.className = "estilista estilista--hover";
+      tarjeta.className = "estilista estilista--hover"; // Clases para estilos CSS
       tarjeta.innerHTML = `
         <img src="../recursos/Tony Chopper.jpeg" alt="${trabajador.nombre_usuario}" class="estilista__foto">
         <div class="estilista__info">
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="estilista__telefono">tel. ${trabajador.telefono}</div>
         </div>
       `;
+
+      // Agregar la tarjeta al contenedor
       contenedor.appendChild(tarjeta);
     });
 
@@ -26,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error cargando trabajadores:", error);
   }
 });
+
 
 
 

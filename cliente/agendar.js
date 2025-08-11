@@ -7,46 +7,48 @@ document.addEventListener("DOMContentLoaded", async () => {
     const mm = String(hoy.getMonth() + 1).padStart(2, "0");
     const dd = String(hoy.getDate()).padStart(2, "0");
     const fechaMin = `${yyyy}-${mm}-${dd}`;
-    inputFecha.min = fechaMin;
+    inputFecha.min = fechaMin;  // Establece fecha mínima como hoy para evitar seleccionar días anteriores
   }
 
   // --- PERSONALIZAR TÍTULO Y CARGAR ID TRABAJADOR / SERVICIOS ---
-  const nombreEstilista = obtenerParametro("nombre");
+  const nombreEstilista = obtenerParametro("nombre");  // Obtiene el nombre del estilista de la URL
   if (nombreEstilista) {
-    const titulo = document.querySelector(".cuadro__titulo");
-    const campoEstilista = document.getElementById("campo-estilista");
-    if (titulo) titulo.textContent = `Agendar con ${nombreEstilista}`;
-    if (campoEstilista) campoEstilista.value = nombreEstilista;
+    const titulo = document.querySelector(".cuadro__titulo");  // Elemento título para modificar
+    const campoEstilista = document.getElementById("campo-estilista");  // Campo oculto para enviar nombre
+    if (titulo) titulo.textContent = `Agendar con ${nombreEstilista}`;  // Cambia el título del formulario
+    if (campoEstilista) campoEstilista.value = nombreEstilista;  // Asigna el nombre al campo oculto
   }
 
-  const idTrabajador = obtenerParametro("id");
+  const idTrabajador = obtenerParametro("id");  // Obtiene el ID del trabajador de la URL
   if (idTrabajador) {
-    const campoIdTrabajador = document.getElementById("id-trabajador");
-    if (campoIdTrabajador) campoIdTrabajador.value = idTrabajador;
+    const campoIdTrabajador = document.getElementById("id-trabajador");  // Campo oculto para enviar ID
+    if (campoIdTrabajador) campoIdTrabajador.value = idTrabajador;  // Asigna el ID al campo oculto
 
     try {
+      // Obtiene información del usuario por ID para saber su rol
       const respUsuario = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/${idTrabajador}`);
       if (!respUsuario.ok) throw new Error("No se pudo cargar el trabajador");
       const usuario = await respUsuario.json();
       const codTipoRol = usuario.cod_tipo_rol;
 
       if (codTipoRol) {
+        // Trae los servicios que corresponden al rol del trabajador
         const respServicios = await fetch(`http://localhost:8080/pruebaApi/api/servicios/rol/${codTipoRol}`);
         if (!respServicios.ok) throw new Error("No se pudo cargar los servicios");
         const servicios = await respServicios.json();
 
         const selectServicios = document.getElementById("select-servicio");
         if (selectServicios) {
-          selectServicios.innerHTML = "<option value=''>Selecciona un servicio...</option>";
+          selectServicios.innerHTML = "<option value=''>Selecciona un servicio...</option>";  // Opción por defecto
           servicios.forEach(servicio => {
             const option = document.createElement("option");
             option.value = servicio.cod_servi;
             option.textContent = servicio.nombre_servicio;
-            selectServicios.appendChild(option);
+            selectServicios.appendChild(option);  // Agrega cada servicio al select
           });
         }
       } else {
-        console.warn("El trabajador no tiene un rol asignado.");
+        console.warn("El trabajador no tiene un rol asignado.");  // Aviso si el trabajador no tiene rol
       }
     } catch (error) {
       console.error("Error al cargar servicios del trabajador:", error);
@@ -67,12 +69,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const modalidades = await respuesta.json();
       const select = document.getElementById("modalidad");
       if (select) {
-        select.innerHTML = '<option value="">Seleccione una modalidad</option>';
+        select.innerHTML = '<option value="">Seleccione una modalidad</option>';  // Opción por defecto
         modalidades.forEach(modalidad => {
           const option = document.createElement("option");
           option.value = modalidad.id_modali;
           option.textContent = modalidad.nombre_modali;
-          select.appendChild(option);
+          select.appendChild(option);  // Agrega cada modalidad al select
         });
       }
     } catch (error) {
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
   }
-  cargarModalidades();
+  cargarModalidades();  // Llama la función para cargar modalidades
 
   // --- ENVÍO DEL FORMULARIO ---
   const formAgendar = document.querySelector(".formulario");
@@ -98,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   formAgendar.addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // Obtiene valores del formulario
     const fechaInput = formAgendar.querySelector('input[type="date"]');
     const horaInput = formAgendar.querySelector('input[type="time"]');
     const selectServicios = document.getElementById("select-servicio");
@@ -106,12 +109,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const fecha = fechaInput ? fechaInput.value : "";
     const horaRaw = horaInput ? horaInput.value : "";
+    // Si la hora tiene formato "HH:mm", agrega ":00" para formato "HH:mm:ss"
     const hora = horaRaw && horaRaw.length === 5 ? horaRaw + ":00" : horaRaw;
     const cod_servi = selectServicios ? selectServicios.value : "";
     const id_modali = selectModalidad ? selectModalidad.value : "";
     const id_trabajador = idTrabajadorField ? idTrabajadorField.value : "";
-    const id_cliente = localStorage.getItem("usuario");
+    const id_cliente = localStorage.getItem("usuario");  // Cliente que agenda, guardado en localStorage
 
+    // Validación básica para campos obligatorios
     if (!fecha || !horaRaw || !cod_servi || !id_modali) {
       Swal.fire({
         icon: "warning",
@@ -122,6 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    // Crea objeto con datos para enviar al backend
     const Agenda = {
       fecha_servicio: fecha,
       hora_servicio: hora,
@@ -132,6 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
+      // Envía POST para crear la cita
       const resp = await fetch("http://localhost:8080/pruebaApi/api/ordenes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -151,6 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         confirmButtonColor: "#d63384"
       });
 
+      // Comentado: redirigir después de agendar
       // setTimeout(() => {
       //   window.location.href = `../Trabajador/clientes.html?userId=${id_cliente || ""}`;
       // }, 2000);
@@ -170,7 +178,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // =================== Función para obtener parámetros de la URL ===================
 function obtenerParametro(nombre) {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(nombre);
+  return urlParams.get(nombre);  // Devuelve el valor del parámetro solicitado
 }
 
 

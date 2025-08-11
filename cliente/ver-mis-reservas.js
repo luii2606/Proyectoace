@@ -1,5 +1,8 @@
+// Espera a que el contenido del DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", async () => {
+  // Obtiene el ID del cliente almacenado en localStorage
   const idCliente = localStorage.getItem("usuario");
+  // Si no hay ID, muestra un error y termina la ejecución
   if (!idCliente) {
     Swal.fire({
       icon: "error",
@@ -9,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // Función para formatear fechas a formato dd/mm/yyyy
   function formatearFecha(fechaRaw) {
     const fecha = new Date(fechaRaw);
     if (isNaN(fecha)) return fechaRaw;
@@ -18,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${dia}/${mes}/${anio}`;
   }
 
+  // Función para cambiar el estado de una orden mediante un PUT al backend
   async function cambiarEstado(idOrden, nuevoEstado) {
     try {
       const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/${idOrden}/estado`, {
@@ -48,22 +53,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
+    // Obtiene las reservas del cliente mediante un fetch al backend
     const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/cliente/${idCliente}`);
     const reservas = await resp.json();
 
+    // Selecciona el contenedor donde se mostrarán las reservas y limpia su contenido
     const contenedor = document.getElementById("lista-citas");
     contenedor.innerHTML = "";
 
+    // Itera sobre cada reserva recibida para construir su UI
     reservas.forEach((reserva) => {
       let horaFormateada = reserva.hora_servicio;
       if (horaFormateada) {
+        // Se queda solo con las horas y minutos
         horaFormateada = horaFormateada.substring(0, 5);
       }
+      // Formatea la fecha
       const fechaFormateada = formatearFecha(reserva.fecha_servicio);
 
+      // Crea la tarjeta o card para la reserva
       const card = document.createElement("div");
       card.classList.add("cita-card");
 
+      // Inserta la estructura HTML con los datos de la reserva
       card.innerHTML = `
         <img src="../recursos/usuarios.jpg" class="cita-img" alt="Cliente">
         <div class="cita-info">
@@ -77,12 +89,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
 
+      // Agrega la card al contenedor principal
       contenedor.appendChild(card);
 
+      // Obtiene los botones y el span de estado para manipularlos
       const btnPagar = card.querySelector(".btn-pagar");
       const btnCancelar = card.querySelector(".btn-cancelar");
       const estadoSpan = card.querySelector(".estado-orden");
 
+      // Función para crear un botón de eliminar reserva
       function crearBotonEliminar() {
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
@@ -101,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           if (!confirmado.isConfirmed) return;
 
-          // Aquí puedes llamar endpoint de eliminar si tienes o solo remover visualmente
+          // Aquí se puede llamar endpoint para eliminar o solo eliminar visualmente
           card.remove();
           Swal.fire({
             icon: "success",
@@ -110,8 +125,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
 
+      // Obtiene el texto del estado en minúsculas para la lógica de visualización
       const estadoText = (estadoSpan.textContent || "").toLowerCase();
 
+      // Ajusta botones según estado de la reserva
       if (estadoText === "cancelado" || estadoText === "completado") {
         btnPagar.style.display = "none";
         btnCancelar.style.display = "none";
@@ -119,12 +136,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else if (estadoText === "confirmado") {
         btnPagar.style.display = "none";
         btnCancelar.style.display = "none";
-        // No botón eliminar en confirmado
+        // No mostrar botón eliminar en estado confirmado
       } else {
         btnPagar.style.display = "inline-block";
         btnCancelar.style.display = "inline-block";
       }
 
+      // Evento para manejar pago y generación de factura
       btnPagar.addEventListener("click", async () => {
         const confirmacion = await Swal.fire({
           icon: "question",
@@ -137,6 +155,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (!confirmacion.isConfirmed) return;
 
+        // Datos para enviar al backend para crear la factura
         const facturaData = {
           id_usuario_cliente: reserva.id_usuario_cliente,
           cod_servi: reserva.cod_servi,
@@ -144,6 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
 
         try {
+          // Petición POST para generar factura
           const respFactura = await fetch("http://localhost:8080/pruebaApi/api/ordenes/factura", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -157,6 +177,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               text: "Factura registrada correctamente"
             });
 
+            // Cambia el estado de la reserva a confirmado si la factura fue creada con éxito
             const exito = await cambiarEstado(reserva.id_orden, "confirmado");
             if (exito) {
               estadoSpan.textContent = "confirmado";
@@ -180,6 +201,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
+      // Evento para cancelar la reserva
       btnCancelar.addEventListener("click", async () => {
         const confirmacion = await Swal.fire({
           icon: "warning",
@@ -192,6 +214,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (!confirmacion.isConfirmed) return;
 
+        // Cambia el estado a cancelado si el usuario confirma
         const exito = await cambiarEstado(reserva.id_orden, "cancelado");
         if (exito) {
           estadoSpan.textContent = "cancelado";
@@ -206,6 +229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
   } catch (error) {
+    // Manejo de errores al cargar reservas
     Swal.fire({
       icon: "error",
       title: "Error cargando reservas",
@@ -214,6 +238,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error cargando reservas:", error);
   }
 });
+
 
 
 
