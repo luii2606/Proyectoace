@@ -1,54 +1,45 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // --- BLOQUEAR DÍAS PASADOS EN EL INPUT DE FECHA ---
-  const inputFecha = document.querySelector('input[type="date"]');
-  if (inputFecha) {
+  const fechaInput = document.querySelector('#fecha');
+  const horaSelect = document.querySelector('#hora');
+
+  // --- BLOQUEAR FECHAS PASADAS ---
+  if (fechaInput) {
     const hoy = new Date();
     const yyyy = hoy.getFullYear();
     const mm = String(hoy.getMonth() + 1).padStart(2, "0");
     const dd = String(hoy.getDate()).padStart(2, "0");
-    const fechaMin = `${yyyy}-${mm}-${dd}`;
-    inputFecha.min = fechaMin;  // Establece fecha mínima como hoy para evitar seleccionar días anteriores
+    fechaInput.min = `${yyyy}-${mm}-${dd}`;
   }
 
-  // --- PERSONALIZAR TÍTULO Y CARGAR ID TRABAJADOR / SERVICIOS ---
-  const nombreEstilista = obtenerParametro("nombre");  // Obtiene el nombre del estilista de la URL
+  // --- CARGAR NOMBRE E ID DEL ESTILISTA ---
+  const nombreEstilista = obtenerParametro("nombre");
   if (nombreEstilista) {
-    const titulo = document.querySelector(".cuadro__titulo");  // Elemento título para modificar
-    const campoEstilista = document.getElementById("campo-estilista");  // Campo oculto para enviar nombre
-    if (titulo) titulo.textContent = `Agendar con ${nombreEstilista}`;  // Cambia el título del formulario
-    if (campoEstilista) campoEstilista.value = nombreEstilista;  // Asigna el nombre al campo oculto
+    document.querySelector(".cuadro__titulo").textContent = `Agendar con ${nombreEstilista}`;
+    document.getElementById("campo-estilista").value = nombreEstilista;
   }
 
-  const idTrabajador = obtenerParametro("id");  // Obtiene el ID del trabajador de la URL
+  const idTrabajador = obtenerParametro("id");
   if (idTrabajador) {
-    const campoIdTrabajador = document.getElementById("id-trabajador");  // Campo oculto para enviar ID
-    if (campoIdTrabajador) campoIdTrabajador.value = idTrabajador;  // Asigna el ID al campo oculto
+    document.getElementById("id-trabajador").value = idTrabajador;
 
     try {
-      // Obtiene información del usuario por ID para saber su rol
       const respUsuario = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/${idTrabajador}`);
       if (!respUsuario.ok) throw new Error("No se pudo cargar el trabajador");
       const usuario = await respUsuario.json();
-      const codTipoRol = usuario.cod_tipo_rol;
 
-      if (codTipoRol) {
-        // Trae los servicios que corresponden al rol del trabajador
-        const respServicios = await fetch(`http://localhost:8080/pruebaApi/api/servicios/rol/${codTipoRol}`);
+      if (usuario.cod_tipo_rol) {
+        const respServicios = await fetch(`http://localhost:8080/pruebaApi/api/servicios/rol/${usuario.cod_tipo_rol}`);
         if (!respServicios.ok) throw new Error("No se pudo cargar los servicios");
         const servicios = await respServicios.json();
 
         const selectServicios = document.getElementById("select-servicio");
-        if (selectServicios) {
-          selectServicios.innerHTML = "<option value=''>Selecciona un servicio...</option>";  // Opción por defecto
-          servicios.forEach(servicio => {
-            const option = document.createElement("option");
-            option.value = servicio.cod_servi;
-            option.textContent = servicio.nombre_servicio;
-            selectServicios.appendChild(option);  // Agrega cada servicio al select
-          });
-        }
-      } else {
-        console.warn("El trabajador no tiene un rol asignado.");  // Aviso si el trabajador no tiene rol
+        selectServicios.innerHTML = "<option value=''>Selecciona un servicio...</option>";
+        servicios.forEach(servicio => {
+          const option = document.createElement("option");
+          option.value = servicio.cod_servi;
+          option.textContent = servicio.nombre_servicio;
+          selectServicios.appendChild(option);
+        });
       }
     } catch (error) {
       console.error("Error al cargar servicios del trabajador:", error);
@@ -62,75 +53,98 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- CARGA DE MODALIDADES ---
-  async function cargarModalidades() {
-    try {
-      const respuesta = await fetch("http://localhost:8080/pruebaApi/api/modalidades");
-      if (!respuesta.ok) throw new Error("Error al cargar las modalidades");
-      const modalidades = await respuesta.json();
-      const select = document.getElementById("modalidad");
-      if (select) {
-        select.innerHTML = '<option value="">Seleccione una modalidad</option>';  // Opción por defecto
-        modalidades.forEach(modalidad => {
-          const option = document.createElement("option");
-          option.value = modalidad.id_modali;
-          option.textContent = modalidad.nombre_modali;
-          select.appendChild(option);  // Agrega cada modalidad al select
-        });
-      }
-    } catch (error) {
-      console.error("Error cargando modalidades:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "No se pudieron cargar las modalidades.",
-        confirmButtonColor: "#d63384"
-      });
-    }
+  try {
+    const respuesta = await fetch("http://localhost:8080/pruebaApi/api/modalidades");
+    if (!respuesta.ok) throw new Error("Error al cargar las modalidades");
+    const modalidades = await respuesta.json();
+    const select = document.getElementById("modalidad");
+    select.innerHTML = '<option value="">Seleccione una modalidad</option>';
+    modalidades.forEach(modalidad => {
+      const option = document.createElement("option");
+      option.value = modalidad.id_modali;
+      option.textContent = modalidad.nombre_modali;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error cargando modalidades:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "No se pudieron cargar las modalidades.",
+      confirmButtonColor: "#d63384"
+    });
   }
-  cargarModalidades();  // Llama la función para cargar modalidades
+
+  // --- CARGAR HORAS DISPONIBLES AL CAMBIAR FECHA ---
+  fechaInput.addEventListener("change", async () => {
+    const fecha = fechaInput.value;
+    const idTrabajador = document.getElementById("id-trabajador").value;
+
+    if (!fecha || !idTrabajador) return;
+
+    try {
+      const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/ocupadas?fecha=${fecha}&id=${idTrabajador}`);
+      if (!resp.ok) throw new Error("Error al consultar horas ocupadas");
+      const ocupadas = await resp.json(); // ["2025-08-18T14:00:00", "2025-08-18 15:00:00"]
+      console.log(ocupadas);
+
+      // --- CAMBIO AQUÍ: Normalizamos a HH:mm ---
+      const horasOcupadas = ocupadas.map(h => {
+        if (!h) return null;
+        const partes = h.includes("T") ? h.split("T") : h.split(" ");
+        const hora = partes[1];
+        // Si incluye segundos, los eliminamos
+        return hora.length > 5 ? hora.substring(0,5) : hora; // HH:mm
+      }).filter(Boolean);
+
+      // Generamos horas de 08:00 a 18:00
+      horaSelect.innerHTML = "<option value=''>Selecciona una hora...</option>";
+      for (let h = 8; h <= 18; h++) {
+        const hora = h.toString().padStart(2,"0") + ":00";
+        const option = document.createElement("option");
+        option.value = hora;
+        option.textContent = hora;
+
+        if (horasOcupadas.includes(hora)) {
+          option.disabled = true;
+          option.textContent += " (Ocupada)";
+          option.style.color = "gray";
+        }
+
+        horaSelect.appendChild(option);
+      }
+    } catch (err) {
+      console.error("Error al consultar horas ocupadas:", err);
+    }
+  });
 
   // --- ENVÍO DEL FORMULARIO ---
   const formAgendar = document.querySelector(".formulario");
 
-  if (!formAgendar) {
-    console.error("No se encontró el formulario con clase 'formulario'.");
-    return;
-  }
-
   formAgendar.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Obtiene valores del formulario
-    const fechaInput = formAgendar.querySelector('input[type="date"]');
-    const horaInput = formAgendar.querySelector('input[type="time"]');
-    const selectServicios = document.getElementById("select-servicio");
-    const selectModalidad = document.getElementById("modalidad");
-    const idTrabajadorField = document.getElementById("id-trabajador");
+    const fecha = document.getElementById("fecha").value;
+    const hora = document.getElementById("hora").value;
+    const cod_servi = document.getElementById("select-servicio").value;
+    const id_modali = document.getElementById("modalidad").value;
+    const id_trabajador = document.getElementById("id-trabajador").value;
+    const id_cliente = localStorage.getItem("usuario");
 
-    const fecha = fechaInput ? fechaInput.value : "";
-    const horaRaw = horaInput ? horaInput.value : "";
-    // Si la hora tiene formato "HH:mm", agrega ":00" para formato "HH:mm:ss"
-    const hora = horaRaw && horaRaw.length === 5 ? horaRaw + ":00" : horaRaw;
-    const cod_servi = selectServicios ? selectServicios.value : "";
-    const id_modali = selectModalidad ? selectModalidad.value : "";
-    const id_trabajador = idTrabajadorField ? idTrabajadorField.value : "";
-    const id_cliente = localStorage.getItem("usuario");  // Cliente que agenda, guardado en localStorage
-
-    // Validación básica para campos obligatorios
-    if (!fecha || !horaRaw || !cod_servi || !id_modali) {
+    if (!fecha || !hora || !cod_servi || !id_modali) {
       Swal.fire({
         icon: "warning",
         title: "Campos incompletos",
-        text: "Por favor completa todos los campos (fecha, hora, servicio y modalidad).",
+        text: "Por favor completa todos los campos.",
         confirmButtonColor: "#d63384"
       });
       return;
     }
 
-    // Crea objeto con datos para enviar al backend
+    const fecha_hora_servicio = `${fecha} ${hora}:00`;
+
     const Agenda = {
-      fecha_servicio: fecha,
-      hora_servicio: hora,
+      fecha_hora_servicio: fecha_hora_servicio,
       id_modali: parseInt(id_modali),
       id_usuario_cliente: id_cliente ? parseInt(id_cliente) : null,
       id_usuario_trabajador: parseInt(id_trabajador || 0),
@@ -138,17 +152,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
-      // Envía POST para crear la cita
       const resp = await fetch("http://localhost:8080/pruebaApi/api/ordenes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Agenda)
       });
 
-      if (!resp.ok) {
-        const text = await resp.text();
-        throw new Error(text || "Error al guardar la cita");
-      }
+      if (!resp.ok) throw new Error(await resp.text());
 
       Swal.fire({
         icon: "success",
@@ -157,39 +167,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         showConfirmButton: false,
         confirmButtonColor: "#d63384"
       });
-
-      // Comentado: redirigir después de agendar
-      // setTimeout(() => {
-      //   window.location.href = `../Trabajador/clientes.html?userId=${id_cliente || ""}`;
-      // }, 2000);
+      formAgendar.reset();
 
     } catch (error) {
       console.error("Error al agendar:", error);
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Error al agendar la cita. Revisa la consola.",
+        text: "Error al agendar la cita.",
         confirmButtonColor: "#d63384"
       });
     }
   });
 });
 
-// =================== Función para obtener parámetros de la URL ===================
 function obtenerParametro(nombre) {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(nombre);  // Devuelve el valor del parámetro solicitado
+  return urlParams.get(nombre);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

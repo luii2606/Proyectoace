@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +8,30 @@
 </head>
 <body class="cliente">
   <nav class="cliente__encabezado">
-  <h1 class="cliente__titulo">Bienvenidos</h1>
-  <div>
-     <a href="index.html" class="cliente__boton-salir">Inicio</a>
-    <a href="agendar-estilista.html" class="cliente__boton-salir">Agendar</a>
-    <a href="ver-mis-reservas.html" class="cliente__boton-salir">Ver mis reservas</a>
-    <a href="../Login/login.html" class="cliente__boton-salir">Cerrar Sesión</a>
-  </div>
-  
-</nav>
+    <h1 class="cliente__titulo">Bienvenidos</h1>
+    <div>
+      <a href="index.html" class="cliente__boton-salir">Inicio</a>
+      <a href="agendar-estilista.html" class="cliente__boton-salir">Agendar</a>
+      <a href="ver-mis-reservas.html" class="cliente__boton-salir">Ver mis reservas</a>
+      <a href="../Login/login.html" class="cliente__boton-salir">Cerrar Sesión</a>
+    </div>
+  </nav>
+
   <main class="cliente__main">
     <section class="cliente__cuadro">
       <h2 class="cuadro__titulo">Agendar Cita</h2>
       <form class="formulario">
         <input type="hidden" id="id-trabajador" name="id_trabajador">
         <input type="hidden" name="estilista" id="campo-estilista" />
+
         <label class="formulario__label">Fecha:
           <input type="date" id="fecha" class="formulario__input" />
         </label>
 
         <label class="formulario__label">Hora:
-          <input type="time" id="hora" class="formulario__input" />
+          <select id="hora" class="formulario__input">
+            <option value="">Selecciona una hora...</option>
+          </select>
         </label>
 
         <label class="formulario__label">Servicio:
@@ -38,10 +41,11 @@
         </label>
 
         <label class="formulario__label" for="modalidad">Modalidad:
-          <select id="modalidad" name="modalidad"  class="formulario__input">
+          <select id="modalidad" name="modalidad" class="formulario__input">
             <option value="">Seleccione una modalidad</option>
           </select>
         </label>
+
         <button type="submit" class="formulario__boton">Agendar</button>
       </form>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

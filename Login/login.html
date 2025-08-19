@@ -1,48 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Define el conjunto de caracteres como UTF-8 -->
+
   <meta charset="UTF-8">
-  <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Título de la página -->
+
   <title>Proyecto ACE</title>
-  <!-- Enlace al archivo CSS principal del proyecto -->
+
   <link rel="stylesheet" href="../styles.css">
-  <!-- Enlace a la biblioteca de iconos Boxicons -->
+
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <!-- Sección principal del login -->
   <div class="login">
-    <!-- Formulario de inicio de sesión -->
     <form action="Agenda.html" class="login__form login__form--inicio" id="login-form">
-      <!-- Contenedor del formulario -->
       <div class="login__container">
-        <!-- Título del formulario -->
         <h1 class="login__title">ACE</h1>
-        <!-- Imagen del logo -->
         <img src="../recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
-        
-        <!-- Grupo para el input del nombre de usuario -->
         <div class="login__input-group">
           <input type="text" class="login__input" name="nombre_usuario" placeholder="Nombre de usuario">
         </div>
-        
-        <!-- Grupo para el input de la contraseña -->
         <div class="login__input-group">
           <input type="password" class="login__input" name="contrasena" placeholder="Contraseña">
         </div>
-        
-        <!-- Botón para enviar el formulario -->
         <button type="submit" class="login__button login__button--hover">Siguiente</button>
-        <!-- Enlace para ir a la página de registro -->
         <a href="../Registro/registro.html" class="login__link login__link--hover">Registrarse</a>
       </div>
     </form>
-    <!-- Librería SweetAlert2 para alertas personalizadas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Archivo JavaScript para la lógica del login -->
     <script src="login.js"></script>
   </div>
 </body>

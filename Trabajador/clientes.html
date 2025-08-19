@@ -1,33 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Metadatos para codificación y diseño adaptable -->
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Título de la pestaña -->
   <title>Document</title>
-  
-  <!-- Enlace a la hoja de estilos CSS general -->
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <!-- Encabezado principal de la página -->
-  <header>
-    <!-- Título principal -->
+ 
+  <header class="encabezado__trabajador">
     <h1>Bienvenido, Trabajador</h1>
-    <!-- Subtítulo o texto informativo -->
-    <p>Estas son tus citas del día</p>
-    <!-- Enlace para cerrar sesión, redirige a la página de login -->
     <a href="../Login/login.html" class="cliente__boton-salir">Cerrar Sesión</a>
   </header>
-  
-  <!-- Contenedor donde se cargarán dinámicamente las citas del trabajador -->
+
   <div id="lista-citas" class="citas-container"></div>
-  
-  <!-- Librería SweetAlert2 para alertas bonitas -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Archivo JavaScript que contiene la lógica para cargar y manejar las citas -->
   <script src="clientes.js"></script>
 </body>
 </html>

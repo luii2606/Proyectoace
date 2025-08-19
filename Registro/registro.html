@@ -1,61 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Define el conjunto de caracteres como UTF-8 -->
+
   <meta charset="UTF-8">
-  <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Título de la página -->
+ 
   <title>Registro</title>
-  <!-- Enlace al archivo CSS principal del proyecto -->
+  
   <link rel="stylesheet" href="../styles.css">
-  <!-- Enlace a la biblioteca de iconos Boxicons -->
+  
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <!-- Contenedor principal para el formulario de registro -->
   <div class="login">
-    <!-- Formulario de registro -->
     <form action="login.html" class="login__form login__form--registro" id="registro-form" >
-      <!-- Contenedor interno del formulario con clase modificadora para registro -->
       <div class="login__container login__container--registro">
-        <!-- Título del formulario -->
         <h1 class="login__title">ACE</h1>
-        <!-- Imagen del logo -->
         <img src="../recursos/descarga (9).jpeg" alt="Logo ACE" class="login__image">
-    
-        <!-- Grupo para input del nombre de usuario -->
         <div class="login__input-group">
           <input type="text" class="login__input" name="nombre_usuario" placeholder="Elige un Nombre de usuario">
         </div>
-    
-        <!-- Grupo para input de la contraseña -->
         <div class="login__input-group">
           <input type="password" class="login__input" name="contrasena" placeholder="Elige una Contraseña">
         </div>
-    
-        <!-- Grupo para input del correo electrónico -->
         <div class="login__input-group">
           <input type="text" class="login__input" name="correo" placeholder="Correo">
         </div>
-    
-        <!-- Grupo para input del teléfono -->
         <div class="login__input-group">
-          <!-- type="number" con maxlength y pattern para validar 10 dígitos -->
           <input type="number" class="login__input" name="telefono" maxlength="10" pattern="\d{10}"  placeholder="Teléfono">
         </div>
-        
-        <!-- Botón para enviar el formulario -->
         <button type="submit" class="login__button login__button--hover">Siguiente</button>
-        <!-- Enlace para ir a la página de inicio de sesión -->
         <a href="../Login/login.html" class="login__link login__link--hover">Iniciar Sesion</a>
       </div>
     </form>
   </div>
-
-  <!-- Librería SweetAlert2 para alertas personalizadas -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Script JavaScript modular para manejar la lógica del registro -->
   <script type="module" src="registro.js"></script>
 </body>
 </html>

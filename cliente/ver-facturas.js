@@ -45,6 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 facturaDiv.classList.add("factura-item");
                 facturaDiv.innerHTML = `
                     <h3>Factura #${factura.id_factura}</h3>
+                    <p><strong>Cliente: ${factura.nombre_cliente}</strong><p>
+                    <p><strong>Trabajador : ${factura.nombre_trabajador}</strong><p>
+                    <p><strong>servicio Realizado : ${factura.nombre_servicio}</strong><p>
                     <p><strong>Fecha de emisión:</strong> ${new Date(factura.fecha_emision).toLocaleDateString()}</p>
                     <p><strong>Total:</strong> $${factura.total}</p>
                     <button class="btn-imprimir">Imprimir PDF</button>

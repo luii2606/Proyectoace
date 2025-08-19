@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="admin">
+  <header class="admin__header">
+    <h1 class="admin__title">Administrador</h1>
+    <p class="admin__subtitle">Bienvenida, Valentina </p>
+  </header>
+
+    <nav class="admin__nav">
+    <ul class="admin__nav-lista">
+      <li class="admin__nav-item">
+        <a class="admin__nav-enlace" href="trabajadores.html">Gestionar Trabajadores</a>
+        <a class="admin__nav-enlace" href="../Login/login.html">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </nav> 
+
+      <div class="admin-citas">
+      <h2>Citas del día</h2>
+      
+      <label for="fecha-admin">Fecha:</label>
+      <input type="date" id="fecha-admin">
+
+      <label for="trabajador-admin">Trabajador:</label>
+      <select id="trabajador-admin"></select>
+
+      <button id="btn-ver-citas">Ver Citas</button>
+
+      <table class="tabla-citas">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Cliente</th>
+            <th>Servicio</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-citas-body">
+          <tr><td colspan="3">Selecciona un trabajador y fecha</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="movimientos-trabajadores.js"></script>
+
+  </body>
+</html>

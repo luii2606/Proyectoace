@@ -1,86 +1,105 @@
-// Esperar a que el DOM esté completamente cargado para ejecutar el código
+// 📌 Espera a que todo el HTML esté cargado antes de ejecutar el código
 document.addEventListener("DOMContentLoaded", async () => {
-  // Obtener el ID del trabajador almacenado en localStorage tras login
+  
+  // 🔹 Obtener el ID del trabajador guardado en localStorage
   const idTrabajador = localStorage.getItem("usuario");
   
-  // Si no se encuentra el ID, mostrar alerta y salir
+  // 🔹 Si no existe el ID, muestra un error y detiene la ejecución
   if (!idTrabajador) {
     await Swal.fire({
       icon: "error",
       title: "Error",
       text: "No se encontró el ID del trabajador"
     });
-    return;
+    return; // ⛔ Detener el código
   }
 
-  // Función para formatear fechas en formato dd/mm/yyyy
-  function formatearFecha(fechaRaw) {
-    const fecha = new Date(fechaRaw);
-    if (isNaN(fecha)) return fechaRaw; // Si la fecha es inválida, retorna el valor original
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes inicia en 0
-    const anio = fecha.getFullYear();
-    return `${dia}/${mes}/${anio}`;
+  // 📌 Función para formatear la fecha y hora en formato DD/MM/YYYY HH:mm
+  function formatearFechaHora(fechaHora) {
+    let fechaFormateada = "";
+    let horaFormateada = "";
+
+    if (fechaHora) {
+      // Caso 1: Si viene como string tipo "2025-08-13T15:30"
+      if (typeof fechaHora === 'string') {
+        const fechaStr = fechaHora.replace('T', ' ').substring(0, 16);
+        fechaFormateada = fechaStr.substring(8, 10) + '/' + fechaStr.substring(5, 7) + '/' + fechaStr.substring(0, 4);
+        horaFormateada = fechaStr.substring(11, 16);
+      }
+      // Caso 2: Si es un objeto Date
+      else if (fechaHora instanceof Date) {
+        const dia = String(fechaHora.getDate()).padStart(2, '0');
+        const mes = String(fechaHora.getMonth() + 1).padStart(2, '0');
+        const anio = fechaHora.getFullYear();
+        const hora = String(fechaHora.getHours()).padStart(2, '0');
+        const minuto = String(fechaHora.getMinutes()).padStart(2, '0');
+        fechaFormateada = `${dia}/${mes}/${anio}`;
+        horaFormateada = `${hora}:${minuto}`;
+      }
+      // Caso 3: Si es un número (timestamp)
+      else if (typeof fechaHora === "number") {
+        const fechaDate = new Date(fechaHora);
+        const dia = String(fechaDate.getDate()).padStart(2, '0');
+        const mes = String(fechaDate.getMonth() + 1).padStart(2, '0');
+        const anio = fechaDate.getFullYear();
+        const hora = String(fechaDate.getHours()).padStart(2, '0');
+        const minuto = String(fechaDate.getMinutes()).padStart(2, '0');
+        fechaFormateada = `${dia}/${mes}/${anio}`;
+        horaFormateada = `${hora}:${minuto}`;
+      }
+      // Caso 4: Cualquier otro tipo de valor
+      else {
+        const fechaStr = String(fechaHora);
+        fechaFormateada = fechaStr;
+        horaFormateada = "";
+      }
+    }
+
+    return { fechaFormateada, horaFormateada };
   }
 
-  // Función para cambiar el estado de una orden/cita en el backend
+  // 📌 Función para cambiar el estado de una orden en la API
   async function cambiarEstado(idOrden, nuevoEstado) {
     try {
-      // Enviar petición PUT para actualizar el estado
       const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/${idOrden}/estado`, {
-        method: "PUT",
+        method: "PUT", // Usamos PUT porque estamos actualizando datos
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado: nuevoEstado }),
       });
 
-      if (resp.ok) {
-        return true; // Éxito
-      } else {
-        const error = await resp.json();
-        // Mostrar error si falla la actualización
-        await Swal.fire({
-          icon: "error",
-          title: "Error al actualizar estado",
-          text: error.message || "Error desconocido"
-        });
-        return false;
-      }
-    } catch (e) {
-      // Manejar errores de conexión
-      await Swal.fire({
-        icon: "error",
-        title: "Error de conexión",
-        text: "No se pudo conectar con el servidor"
-      });
+      if (resp.ok) return true; // ✅ Actualización exitosa
+
+      // ❌ Si falla, mostramos error
+      const error = await resp.json();
+      await Swal.fire({ icon: "error", title: "Error al actualizar estado", text: error.message || "Error desconocido" });
+      return false;
+
+    } catch {
+      // ❌ Error de conexión
+      await Swal.fire({ icon: "error", title: "Error de conexión", text: "No se pudo conectar con el servidor" });
       return false;
     }
   }
 
+  // 📌 Bloque principal: Cargar citas del trabajador
   try {
-    // Solicitar al backend todas las citas del trabajador usando su ID
     const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/trabajador/${idTrabajador}`);
     const citas = await resp.json();
 
-    // Contenedor donde se mostrarán las citas
+    // 📌 Limpiamos el contenedor de citas
     const contenedor = document.getElementById("lista-citas");
-    contenedor.innerHTML = ""; // Limpiar contenido previo
+    contenedor.innerHTML = "";
 
-    // Iterar por cada cita para crear su card en el DOM
+    // 📌 Recorremos todas las citas y las mostramos en tarjetas
     citas.forEach(cita => {
-      // Formatear hora a formato hh:mm, si existe
-      let horaFormateada = cita.hora_servicio;
-      if (horaFormateada) {
-        horaFormateada = horaFormateada.substring(0, 5);
-      }
 
-      // Formatear fecha con función personalizada
-      const fechaFormateada = formatearFecha(cita.fecha_servicio);
+      // 📅 Unificar fecha y hora
+      let fechaHora = cita.fecha_hora_servicio || `${cita.fecha_servicio}T${cita.hora_servicio || "00:00"}`;
+      const { fechaFormateada, horaFormateada } = formatearFechaHora(fechaHora);
 
-      // Crear div contenedor para la cita
+      // 📌 Crear la tarjeta
       const card = document.createElement("div");
       card.classList.add("cita-cardt");
-
-      // Insertar HTML con detalles de la cita y botones de acción
       card.innerHTML = `
         <img src="../recursos/usuarios.jpg" class="cita-img" alt="Cliente">
         <div class="cita-info">
@@ -93,24 +112,20 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button class="btn-cancelar">Cancelar</button>
         </div>
       `;
-
-      // Agregar la card al contenedor principal
       contenedor.appendChild(card);
 
-      // Obtener referencias a botones y texto estado dentro de la card
+      // 📌 Referencias a elementos
       const btnCompletar = card.querySelector(".btn-completar");
       const btnCancelar = card.querySelector(".btn-cancelar");
       const estadoSpan = card.querySelector(".estado-orden");
 
-      // Función para agregar botón eliminar a la card
+      // 📌 Función para crear botón "Eliminar"
       function crearBotonEliminar() {
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
         btnEliminar.classList.add("btn-eliminar");
-        // Insertar botón eliminar justo después del botón cancelar
         btnCancelar.insertAdjacentElement("afterend", btnEliminar);
 
-        // Evento para confirmar y eliminar la cita (marcar como cancelada)
         btnEliminar.addEventListener("click", async () => {
           const { isConfirmed } = await Swal.fire({
             icon: "warning",
@@ -121,48 +136,38 @@ document.addEventListener("DOMContentLoaded", async () => {
             cancelButtonText: "Cancelar"
           });
 
-          if (!isConfirmed) return; // Si cancela, salir
+          if (!isConfirmed) return;
 
           const eliminado = await cambiarEstado(cita.id_orden, "cancelado");
           if (eliminado) {
-            card.remove(); // Quitar card del DOM
-            await Swal.fire({
-              icon: "success",
-              title: "Cita eliminada",
-              timer: 1500,
-              showConfirmButton: false
-            });
+            card.remove();
+            await Swal.fire({ icon: "success", title: "Cita eliminada", timer: 1500, showConfirmButton: false });
           }
         });
       }
 
-      // Convertir estado a minúsculas para comparaciones
+      // 📌 Ajustar botones y estado según la cita
       const estadoText = (cita.estado || "").toLowerCase();
 
-      // Ajustar botones y estado visual según estado actual de la cita
       if (estadoText === "confirmado") {
         estadoSpan.textContent = "Confirmada";
         estadoSpan.style.color = "green";
-
-        btnCancelar.style.display = "none";      // Ocultar cancelar
-        btnCompletar.style.display = "inline-block"; // Mostrar completar
-
-      } else if (estadoText === "completado" || estadoText === "cancelado") {
-        btnCompletar.style.display = "none";  // Ocultar botones completar y cancelar
         btnCancelar.style.display = "none";
-        crearBotonEliminar();                  // Agregar botón eliminar
-
-        // Mostrar estado con primera letra mayúscula
+        btnCompletar.style.display = "inline-block";
+      } 
+      else if (estadoText === "completado" || estadoText === "cancelado") {
+        btnCompletar.style.display = "none";
+        btnCancelar.style.display = "none";
+        crearBotonEliminar();
         estadoSpan.textContent = estadoText.charAt(0).toUpperCase() + estadoText.slice(1);
         estadoSpan.style.color = "gray";
-
-      } else {
-        // Para otros estados (ejemplo: pendiente), mostrar ambos botones
+      } 
+      else {
         btnCompletar.style.display = "inline-block";
         btnCancelar.style.display = "inline-block";
       }
 
-      // Evento click para botón completar
+      // 📌 Evento: Completar cita
       btnCompletar.addEventListener("click", async () => {
         const { isConfirmed } = await Swal.fire({
           icon: "question",
@@ -177,25 +182,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const exito = await cambiarEstado(cita.id_orden, "completado");
         if (exito) {
-          // Actualizar estado visual y ocultar botones
           estadoSpan.textContent = "Completado";
           estadoSpan.style.color = "gray";
-
           btnCompletar.style.display = "none";
           btnCancelar.style.display = "none";
-
           crearBotonEliminar();
-
-          await Swal.fire({
-            icon: "success",
-            title: "Cita completada",
-            timer: 1500,
-            showConfirmButton: false
-          });
+          await Swal.fire({ icon: "success", title: "Cita completada", timer: 1500, showConfirmButton: false });
         }
       });
 
-      // Evento click para botón cancelar
+      // 📌 Evento: Cancelar cita
       btnCancelar.addEventListener("click", async () => {
         const { isConfirmed } = await Swal.fire({
           icon: "warning",
@@ -210,35 +206,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const exito = await cambiarEstado(cita.id_orden, "cancelado");
         if (exito) {
-          // Actualizar estado visual y ocultar botones
           estadoSpan.textContent = "Cancelado";
           estadoSpan.style.color = "gray";
-
           btnCompletar.style.display = "none";
           btnCancelar.style.display = "none";
-
           crearBotonEliminar();
-
-          await Swal.fire({
-            icon: "success",
-            title: "Cita cancelada",
-            timer: 1500,
-            showConfirmButton: false
-          });
+          await Swal.fire({ icon: "success", title: "Cita cancelada", timer: 1500, showConfirmButton: false });
         }
       });
 
     });
   } catch (error) {
-    // Mostrar error si falla la carga de citas
-    await Swal.fire({
-      icon: "error",
-      title: "Error cargando citas",
-      text: "No se pudieron cargar las citas"
-    });
+    // ❌ Error cargando citas desde el servidor
+    await Swal.fire({ icon: "error", title: "Error cargando citas", text: "No se pudieron cargar las citas" });
     console.error("Error cargando citas:", error);
   }
 });
+
 
 
 

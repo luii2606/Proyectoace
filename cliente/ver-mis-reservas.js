@@ -12,16 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Función para formatear fechas a formato dd/mm/yyyy
-  function formatearFecha(fechaRaw) {
-    const fecha = new Date(fechaRaw);
-    if (isNaN(fecha)) return fechaRaw;
-    const dia = String(fecha.getDate()).padStart(2, "0");
-    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
-    const anio = fecha.getFullYear();
-    return `${dia}/${mes}/${anio}`;
-  }
-
   // Función para cambiar el estado de una orden mediante un PUT al backend
   async function cambiarEstado(idOrden, nuevoEstado) {
     try {
@@ -63,13 +53,46 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Itera sobre cada reserva recibida para construir su UI
     reservas.forEach((reserva) => {
-      let horaFormateada = reserva.hora_servicio;
-      if (horaFormateada) {
-        // Se queda solo con las horas y minutos
-        horaFormateada = horaFormateada.substring(0, 5);
-      }
-      // Formatea la fecha
-      const fechaFormateada = formatearFecha(reserva.fecha_servicio);
+      // Extraemos fecha y hora del campo fecha_hora_servicio
+      const fechaHora = reserva.fecha_hora_servicio;
+      let fechaFormateada = "";
+      let horaFormateada = "";
+if (fechaHora) {
+  if (typeof fechaHora === 'string') {
+    // Caso string ISO
+    const fechaStr = fechaHora.replace('T', ' ').substring(0, 16); // "2025-08-12 11:24"
+    fechaFormateada = fechaStr.substring(8, 10) + '/' + fechaStr.substring(5, 7) + '/' + fechaStr.substring(0, 4);
+    horaFormateada = fechaStr.substring(11, 16);
+  } else if (fechaHora instanceof Date) {
+    // Caso objeto Date
+    const dia = String(fechaHora.getDate()).padStart(2, '0');
+    const mes = String(fechaHora.getMonth() + 1).padStart(2, '0'); // Mes inicia en 0
+    const anio = fechaHora.getFullYear();
+    const hora = String(fechaHora.getHours()).padStart(2, '0');
+    const minuto = String(fechaHora.getMinutes()).padStart(2, '0');
+
+    fechaFormateada = `${dia}/${mes}/${anio}`;
+    horaFormateada = `${hora}:${minuto}`;
+  } else if (typeof fechaHora === "number") {
+    // Si es timestamp en milisegundos
+    const fechaDate = new Date(fechaHora);
+    const dia = String(fechaDate.getDate()).padStart(2, '0');
+    const mes = String(fechaDate.getMonth() + 1).padStart(2, '0');
+    const anio = fechaDate.getFullYear();
+    const hora = String(fechaDate.getHours()).padStart(2, '0');
+    const minuto = String(fechaDate.getMinutes()).padStart(2, '0');
+
+    fechaFormateada = `${dia}/${mes}/${anio}`;
+    horaFormateada = `${hora}:${minuto}`;
+  } else {
+    // Otro tipo -> conviertes a string directo
+    const fechaStr = String(fechaHora);
+    fechaFormateada = fechaStr;
+    horaFormateada = "";
+  }
+}
+
+
 
       // Crea la tarjeta o card para la reserva
       const card = document.createElement("div");
@@ -157,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Datos para enviar al backend para crear la factura
         const facturaData = {
+           id_orden: reserva.id_orden ,
           id_usuario_cliente: reserva.id_usuario_cliente,
           cod_servi: reserva.cod_servi,
           fecha_emision: new Date().toISOString().split("T")[0]
@@ -238,9 +262,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error cargando reservas:", error);
   }
 });
-
-
-
-
-
-

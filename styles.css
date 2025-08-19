@@ -144,6 +144,7 @@ body{
   font-weight: bold;
 }
 
+
 .cliente__boton-salir {
   background-color: var(--marron-claro);
   color: var(--crema-claro);
@@ -247,171 +248,7 @@ body{
   cursor: pointer;
   font-weight: bold;
 }
-/* Lista de productos */
-.cliente__lista {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-.cliente__item {
-  background-color: var(--crema-claro);
-  padding: 1vw;
-  margin-bottom: 1vw;
-  border-left: 4px solid var(--rojo-vino);
-  border-radius: 1vw;
-  font-size: 1vw;
-  color: var(--marron-claro);
-}
-/* productos vista cliente */
-.productos {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 2rem;
-  background-color: var(--crema-claro);
-  border-radius: 1.5rem;
-  box-shadow: 0 0 10px var(--sombra-suave);
-  text-align: center;
-}
-
-.productos__titulo {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: var(--marron-oscuro);
-}
-
-.productos__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  justify-items: center;
-}
-
-.productos {
-  padding: 2rem;
-  background-color: var(--crema-claro);
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.productos__titulo {
-  text-align: center;
-  font-size: 2rem;
-  color: var(--marron-oscuro);
-  margin-bottom: 2rem;
-}
-
-.productos__lista {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.productos,.servicios {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.productos__titulo {
-  font-size: 2rem;
-  color: var(--marron-claro);
-  margin-bottom: 2rem;
-}
-
-.productos__lista {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.productos__item {
-  background-color: var(--blanco);
-  border: 2px solid var(--rosa-pastel);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  transition: transform 0.2s ease;
-}
-
-.productos__item:hover {
-  transform: scale(1.02);
-}
-
-.productos__nombre {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: var(--marron-claro);
-}
-
-.productos__descripcion {
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-  color: var(--gris);
-}
-
-.productos__precio {
-  font-weight: bold;
-  color: var(--rosa-oscuro);
-  margin-bottom: 0.8rem;
-}
-
-.productos__cantidad-label {
-  font-size: 0.9rem;
-  color: var(--gris);
-}
-
-.productos__cantidad-input {
-  width: 60px;
-  margin-left: 0.5rem;
-  padding: 0.3rem;
-  border-radius: 6px;
-  border: 1px solid var(--crema-claro);
-}
-
-.productos__boton {
-  background-color: var(--rosa-pastel);
-  color: var(--blanco);
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.productos__volver {
-  background-color: var(--rosa-pastel);
-  color: var(--blanco);
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
-}
-/* botón de agrgar productos a la cita */
-.productos__agregar{
-   background-color: var(--rosa-oscuro);
-  color: var(--blanco);
-  border: none;
-  padding: 0.2rem 2rem;
-  font-size: 14px;
-  border-radius: 7px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.productos__boton:hover {
-  background-color: var(--rosa-pastel-oscuro);
-}
-.productos__volver:hover {
-  background-color: var(--rosa-pastel-oscuro);
-}
  /*-------------------- bloque incio --------------------*/
 
  .title__inicio{
@@ -829,6 +666,101 @@ body.admin {
 
 .btn-imprimir:hover {
   background-color: #2980b9;
+}
+
+.encabezado__trabajador{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ================== Movimientos Trabajadores ================== */
+.admin-citas {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  background: var(--blanco);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--sombra);
+}
+
+.admin-citas h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: var(--marron-oscuro);
+  text-align: center;
+}
+
+/* Inputs y selects */
+.admin-citas label {
+  display: block;
+  margin: 1rem 0 0.3rem;
+  font-weight: 600;
+  color: var(--marron-oscuro);
+}
+
+.admin-citas input,
+.admin-citas select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--gris-claro);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+   background-color: var(--crema-claro);
+}
+
+.admin-citas input:focus,
+.admin-citas select:focus {
+  border: 1px solid var(--rosa-oscuro);
+  box-shadow: 0 0 6px var(--rosa-pastel);
+ 
+}
+
+/* Botón */
+#btn-ver-citas {
+  display: inline-block;
+  background: var(--rosa-oscuro);
+  color: var(--blanco);
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#btn-ver-citas:hover {
+  background: var(--marron-claro);
+  transform: scale(1.05);
+}
+
+/* ================== TABLA ================== */
+.tabla-citas {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--sombra);
+}
+
+.tabla-citas thead {
+  background: var(--rosa-pastel);
+  color: var(--marron-oscuro);
+}
+
+.tabla-citas th,
+.tabla-citas td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--gris-claro);
+  
+}
+
+.tabla-citas tbody tr:hover {
+  background: var(--crema-claro);
 }
 
 

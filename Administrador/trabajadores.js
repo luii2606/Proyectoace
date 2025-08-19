@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Validar que nombre de usuario no sea solo números
-    if (/^\d+$/.test(nombre_usuario)) {
+    if (!/^[a-zA-Z]+$/.test(nombre_usuario)) {
       Swal.fire({
         icon: "warning",
         title: "Nombre de usuario inválido",

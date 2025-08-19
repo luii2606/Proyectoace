@@ -113,6 +113,13 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         // Redirige a la página de login tras mostrar el mensaje de éxito
         window.location.href = "../Login/login.html";
       });
+    } else if (response.status === 409) {
+      // Usuario ya existe
+      Swal.fire({
+        icon: "error",
+        title: "Nombre de usuario no disponible",
+        text: "El nombre de usuario ya está en uso, por favor elige otro"
+      });
     } else {
       // Si la respuesta no es exitosa, obtiene y muestra el error
       const error = await response.text();
@@ -133,6 +140,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     });
   }
 });
+
 
 
 

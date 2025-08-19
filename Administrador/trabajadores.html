@@ -1,76 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Define el conjunto de caracteres como UTF-8 -->
   <meta charset="UTF-8">
-  <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Título de la página -->
   <title>trabajadores</title>
-  <!-- Enlace al archivo CSS principal del proyecto -->
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="admin">
-
-  <!-- Cabecera principal del administrador -->
   <header class="admin__header">
     <h1 class="admin__title">Administrador</h1>
     <p class="admin__subtitle">Bienvenida, Valentina </p>
   </header>
 
-  <!-- Navegador con opción para cerrar sesión -->
   <nav class="admin__nav">
     <ul class="admin__nav-lista">
       <li class="admin__nav-item">
+        <a class="admin__nav-enlace" href="movimientos-trabajadores.html">Movimientos de Trabajadores</a>
         <a class="admin__nav-enlace" href="../Login/login.html">Cerrar Sesión</a>
       </li>
     </ul>
   </nav> 
 
-  <!-- Contenido principal -->
   <main class="admin__main">
-
-    <!-- Sección para registrar un nuevo trabajador -->
     <section class="admin__section admin__section--trabajadores">
       <h2 class="admin__section-title">Registrar Trabajador</h2>
-
-      <!-- Formulario para registro de trabajador -->
       <form class="form form--trabajador" id="form-trabajador">
-        <!-- Grupo para input usuario -->
         <div class="form__group">
           <label class="form__label" for="usuario-trabajador">Usuario:</label>
-          <input class="form__input" type="text" id="usuario-trabajador"  />
+          <input class="form__input" type="text" id="usuario-trabajador" />
         </div>
-        <!-- Grupo para input correo -->
         <div class="form__group">
           <label class="form__label" for="correo-trabajador">Correo:</label>
-          <input class="form__input" type="text" id="correo-trabajador"  />
+          <input class="form__input" type="text" id="correo-trabajador" />
         </div>
-        <!-- Grupo para input teléfono -->
         <div class="form__group">
           <label class="form__label" for="usuario-trabajador">Telefono:</label>
-          <input class="form__input" type="number" id="telefono-trabajador"  />
+          <input class="form__input" type="number" id="telefono-trabajador" />
         </div>
-        <!-- Selector para rol del trabajador -->
         <label class="form__label" for="rol-trabajador">Rol:</label>
-          <select name="rol-trabajador" class="form__input" id="rol-trabajador">
-            <option value="">Seleccione un rol</option>
-          </select>
-        <!-- Grupo para input contraseña -->
+        <select name="rol-trabajador" class="form__input" id="rol-trabajador">
+          <option value="">Seleccione un rol</option>
+        </select>
         <div class="form__group">
           <label class="form__label" for="contrasena-trabajador">Contraseña:</label>
-          <input class="form__input" type="password" id="contrasena-trabajador"  />
+          <input class="form__input" type="password" id="contrasena-trabajador" />
         </div>
-        <!-- Botón para enviar el formulario -->
         <button id="btn-guardar" class="form__button" type="submit">Registrar Trabajador</button>
       </form>
     </section>
 
-    <!-- Sección para mostrar la lista de trabajadores registrados -->
     <section class="admin__seccion admin__seccion--lista">
       <h2 class="admin__seccion-titulo">Trabajadores Registrados</h2>
-
-      <!-- Tabla con trabajadores -->
       <table class="admin__tabla" id="tabla-trabajadores">
         <thead class="admin__tabla-cabecera">
           <tr class="admin__tabla-fila">
@@ -82,16 +62,12 @@
             <th class="admin__tabla-encabezado">Acciones</th>
           </tr>
         </thead>
-        <tbody class="admin__tabla-cuerpo" id="tbody-trabajadores">
-          <!-- Filas dinámicas que se llenan con JavaScript -->
-        </tbody>
+        <tbody class="admin__tabla-cuerpo" id="tbody-trabajadores"></tbody>
       </table>
-
-      <!-- Librería SweetAlert2 para alertas personalizadas -->
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <!-- Script con la lógica de registro y gestión de trabajadores -->
       <script src="trabajadores.js"></script>
     </section>
   </main>
 </body>
 </html>
+
