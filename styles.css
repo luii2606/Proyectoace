@@ -523,6 +523,7 @@ body.admin {
     display: flex;
     gap: 15px;
     padding: 20px;
+     flex-wrap: wrap;
 }
 
 .cita-card {
@@ -763,6 +764,70 @@ body.admin {
   background: var(--crema-claro);
 }
 
+
+/* --- FACTURAS -- ADMINISTRADOR --- */
+.admin__facturas {
+  background-color: var(--blanco);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.admin__titulo {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--marron-oscuro);
+}
+
+/* --- Input y Botón --- */
+.admin__input {
+  padding: 8px 12px;
+  border: 1px solid var(--marron-claro);
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.admin__boton {
+  padding: 8px 14px;
+  background-color: var(--rosa-pastel);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin__boton:hover {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+}
+
+/* --- Tabla --- */
+.admin__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin__tabla th,
+.admin__tabla td {
+  padding: 12px 15px;
+  border: 1px solid var(--gris-suave);
+  text-align: center;
+}
+
+.admin__tabla th {
+  background-color: var(--marron-claro);
+  color: var(--blanco);
+}
+
+.admin__tabla tr:nth-child(even) {
+  background-color: var(--gris-suave);
+}
+
+.admin__tabla tr:hover {
+  background-color: var(--rosa-pastel);
+}
 
 
 

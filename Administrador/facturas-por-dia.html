@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fcaturas por Día</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="admin">
+  <header class="admin__header">
+    <h1 class="admin__title">Administrador</h1>
+    <p class="admin__subtitle">Bienvenida, Valentina </p>
+  </header>
+
+  <nav class="admin__nav">
+    <ul class="admin__nav-lista">
+      <li class="admin__nav-item">
+        <a class="admin__nav-enlace" href="trabajadores.html">Gestionar Trabajadores</a>
+        <a class="admin__nav-enlace" href="movimientos-trabajadores.html">Movimientos de Trabajadores</a>
+        <a class="admin__nav-enlace" href="../Login/login.html">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="admin__facturas">
+  <h2 class="admin__titulo">Facturas por Día</h2>
+  <input type="date" id="fecha-busqueda" class="admin__input">
+  <button id="btn-buscar" class="admin__boton">Buscar</button>
+
+  <table class="admin__tabla">
+    <thead>
+      <tr>
+        <th>ID Factura</th>
+        <th>Hora</th>
+        <th>Total</th>
+        <th>Cliente</th>
+        <th>Trabajador</th>
+        <th>Servicio</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-facturas-body"></tbody>
+  </table>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="facturas-por-dia.js"></script>
+  
+</body>
+</html>

@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-trabajador");
   const tabla = document.getElementById("tabla-trabajadores").querySelector("tbody");
   const btnGuardar = document.getElementById("btn-guardar"); // botón para guardar o actualizar
+  const inputUsuario = document.getElementById("usuario-trabajador");
+
+  // 🚫 Bloquear números y caracteres especiales en el campo de usuario
+  inputUsuario.addEventListener("input", () => {
+    // Solo letras y espacios permitidos
+    inputUsuario.value = inputUsuario.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
+  });
 
   // Cargar lista inicial de trabajadores y roles para el select
   cargarTrabajadores();
@@ -24,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const cod_tipo_rol = document.getElementById("rol-trabajador").value;
     let contrasena = document.getElementById("contrasena-trabajador").value;
 
-    // Validaciones de campos individuales (algunas están comentadas, pero puedes activarlas)
     // Validación nombre de usuario mínimo 5 caracteres
     if (nombre_usuario.length < 5) {
       Swal.fire({
@@ -36,12 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Validar que nombre de usuario no sea solo números
-    if (!/^[a-zA-Z]+$/.test(nombre_usuario)) {
+    // Validar que nombre de usuario solo contenga letras y espacios
+    if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre_usuario)) {
       Swal.fire({
         icon: "warning",
         title: "Nombre de usuario inválido",
-        text: "El nombre de usuario no puede ser solo números",
+        text: "El nombre de usuario solo puede contener letras",
         confirmButtonColor: "#d63384"
       });
       return;
@@ -71,12 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Validación especial para la contraseña:
-    // Si está editando y no ingresa contraseña, se mantiene la anterior
+    // Validación de contraseña
     if (!contrasena && idEditando) {
       contrasena = contrasenaAnterior;
     } else {
-      // Si ingresa contraseña, validar requisitos de complejidad
       const erroresContrasena = [];
       if (contrasena.length < 8) erroresContrasena.push("Debe tener al menos 8 caracteres.");
       if (!/[a-z]/.test(contrasena)) erroresContrasena.push("Debe contener al menos una minúscula.");
@@ -95,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Validar que se haya seleccionado un rol válido
+    // Validar rol
     const rol = document.getElementById("rol-trabajador").value;
     if (!rol || rol === "0" || rol === "") {
       Swal.fire({
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Construir objeto trabajador a enviar al backend
+    // Construir objeto trabajador
     const trabajador = {
       nombre_usuario,
       contrasena,
@@ -121,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let response;
 
       if (idEditando) {
-        // Si está editando, hacer PUT con el ID para actualizar
+        // PUT para actualizar
         response = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/trabajadores/${idEditando}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -136,9 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
             showConfirmButton: false,
             confirmButtonColor: "#d63384"
           });
-          idEditando = null;           // Limpiar modo edición
-          contrasenaAnterior = null;   // Limpiar contraseña almacenada
-          btnGuardar.textContent = "Registrar trabajador"; // Cambiar texto botón a registro
+          idEditando = null;
+          contrasenaAnterior = null;
+          btnGuardar.textContent = "Registrar trabajador";
         } else {
           const error = await response.json();
           Swal.fire({
@@ -149,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
       } else {
-        // Si no está editando, crear nuevo trabajador con POST
+        // POST para crear
         response = await fetch("http://localhost:8080/pruebaApi/api/usuarios", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -164,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showConfirmButton: false,
             confirmButtonColor: "#d63384"
           });
-          btnGuardar.textContent = "Registrar trabajador"; // Asegurar texto correcto
+          btnGuardar.textContent = "Registrar trabajador";
         } else {
           const error = await response.json();
           Swal.fire({
@@ -176,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Limpiar formulario y recargar lista de trabajadores
+      // Reset y recargar
       form.reset();
       cargarTrabajadores();
 
@@ -191,16 +195,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Función para cargar la lista de trabajadores y mostrarla en la tabla
+  // Función para cargar la lista de trabajadores
   async function cargarTrabajadores() {
-    tabla.innerHTML = ""; // Limpiar contenido
-
+    tabla.innerHTML = "";
     try {
-      // Obtener lista de trabajadores con sus roles
       const response = await fetch("http://localhost:8080/pruebaApi/api/usuarios/trabajadores-rol");
       const trabajadores = await response.json();
 
-      // Por cada trabajador, crear fila en la tabla
       trabajadores.forEach(t => {
         const fila = document.createElement("tr");
         fila.innerHTML = `
@@ -215,15 +216,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </td>
         `;
 
-        // Añadir fila a la tabla
         tabla.appendChild(fila);
 
-        // Agregar evento para botón Editar
         fila.querySelector(".tabla__boton--editar").addEventListener("click", () => {
           editarTrabajador(t.id_usuario);
         });
-
-        // Agregar evento para botón Eliminar
         fila.querySelector(".tabla__boton--eliminar").addEventListener("click", () => {
           eliminarTrabajador(t.id_usuario);
         });
@@ -233,9 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Función para eliminar un trabajador con confirmación
+  // Función para eliminar trabajador
   async function eliminarTrabajador(id) {
-    // Mostrar alerta de confirmación
     const resultado = await Swal.fire({
       title: "¿Estás segura de eliminar este trabajador?",
       icon: "warning",
@@ -245,17 +241,14 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmButtonColor: "#d63384"
     });
 
-    // Si el usuario cancela, salir
     if (!resultado.isConfirmed) return;
 
     try {
-      // Hacer petición DELETE al backend
       const response = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/${id}`, {
         method: "DELETE"
       });
 
       if (response.ok) {
-        // Mostrar éxito y recargar tabla
         Swal.fire({
           icon: "success",
           title: "Trabajador eliminado",
@@ -281,25 +274,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Función para cargar datos de un trabajador en el formulario para edición
+  // Función para editar trabajador
   async function editarTrabajador(id) {
     try {
-      // Obtener datos del trabajador desde backend
       const response = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/${id}`);
       const trabajador = await response.json();
 
-      // Rellenar campos del formulario con datos recibidos
       document.getElementById("usuario-trabajador").value = trabajador.nombre_usuario;
       document.getElementById("correo-trabajador").value = trabajador.correo;
       document.getElementById("telefono-trabajador").value = trabajador.telefono;
-      document.getElementById("contrasena-trabajador").value = ""; // No mostrar contraseña por seguridad
-      contrasenaAnterior = trabajador.contrasena; // Guardar contraseña actual para mantenerla si no se cambia
+      document.getElementById("contrasena-trabajador").value = "";
+      contrasenaAnterior = trabajador.contrasena;
 
       document.getElementById("rol-trabajador").value = trabajador.cod_tipo_rol;
 
-      // Marcar que se está en modo edición
       idEditando = id;
-      btnGuardar.textContent = "Guardar cambios"; // Cambiar texto botón
+      btnGuardar.textContent = "Guardar cambios";
 
       Swal.fire({
         icon: "info",
@@ -316,17 +306,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Función para cargar opciones de roles desde el backend y llenar el select
+  // Función para cargar roles
   async function cargarRoles() {
     const select = document.getElementById("rol-trabajador");
-    select.innerHTML = '<option value="">Seleccione un rol</option>'; // opción por defecto
+    select.innerHTML = '<option value="">Seleccione un rol</option>';
 
     try {
-      // Obtener lista de roles
       const response = await fetch("http://localhost:8080/pruebaApi/api/roles");
       const roles = await response.json();
 
-      // Agregar cada rol como opción en el select
       roles.forEach(rol => {
         const option = document.createElement("option");
         option.value = rol.cod_tipo_rol;
@@ -343,6 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
 
 
 
