@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: "Error",
       text: "No se encontró el ID del trabajador"
     });
-    return; // ⛔ Detener el código
+    return; //  Detener el código
   }
 
-  // 📌 Función para formatear la fecha y hora en formato DD/MM/YYYY HH:mm
+  //  Función para formatear la fecha y hora en formato DD/MM/YYYY HH:mm
   function formatearFechaHora(fechaHora) {
     let fechaFormateada = "";
     let horaFormateada = "";
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { fechaFormateada, horaFormateada };
   }
 
-  // 📌 Función para cambiar el estado de una orden en la API
+  //  Función para cambiar el estado de una orden en la API
   async function cambiarEstado(idOrden, nuevoEstado) {
     try {
       const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/${idOrden}/estado`, {
@@ -67,37 +67,37 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({ estado: nuevoEstado }),
       });
 
-      if (resp.ok) return true; // ✅ Actualización exitosa
+      if (resp.ok) return true; // Actualización exitosa
 
-      // ❌ Si falla, mostramos error
+      //  Si falla, mostramos error
       const error = await resp.json();
       await Swal.fire({ icon: "error", title: "Error al actualizar estado", text: error.message || "Error desconocido" });
       return false;
 
     } catch {
-      // ❌ Error de conexión
+      //  Error de conexión
       await Swal.fire({ icon: "error", title: "Error de conexión", text: "No se pudo conectar con el servidor" });
       return false;
     }
   }
 
-  // 📌 Bloque principal: Cargar citas del trabajador
+  //  Bloque principal: Cargar citas del trabajador
   try {
     const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/trabajador/${idTrabajador}`);
     const citas = await resp.json();
 
-    // 📌 Limpiamos el contenedor de citas
+    //  Limpiamos el contenedor de citas
     const contenedor = document.getElementById("lista-citas");
     contenedor.innerHTML = "";
 
-    // 📌 Recorremos todas las citas y las mostramos en tarjetas
+    //  Recorremos todas las citas y las mostramos en tarjetas
     citas.forEach(cita => {
 
-      // 📅 Unificar fecha y hora
+      //  Unificar fecha y hora
       let fechaHora = cita.fecha_hora_servicio || `${cita.fecha_servicio}T${cita.hora_servicio || "00:00"}`;
       const { fechaFormateada, horaFormateada } = formatearFechaHora(fechaHora);
 
-      // 📌 Crear la tarjeta
+      //  Crear la tarjeta
       const card = document.createElement("div");
       card.classList.add("cita-cardt");
       card.innerHTML = `
@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       contenedor.appendChild(card);
 
-      // 📌 Referencias a elementos
+      //  Referencias a elementos
       const btnCompletar = card.querySelector(".btn-completar");
       const btnCancelar = card.querySelector(".btn-cancelar");
       const estadoSpan = card.querySelector(".estado-orden");
 
-      // 📌 Función para crear botón "Eliminar"
+      //  Función para crear botón "Eliminar"
       function crearBotonEliminar() {
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
 
-      // 📌 Ajustar botones y estado según la cita
+      //  Ajustar botones y estado según la cita
       const estadoText = (cita.estado || "").toLowerCase();
 
       if (estadoText === "confirmado") {
@@ -160,14 +160,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         btnCancelar.style.display = "none";
         crearBotonEliminar();
         estadoSpan.textContent = estadoText.charAt(0).toUpperCase() + estadoText.slice(1);
-        estadoSpan.style.color = "gray";
+        estadoSpan.style.color = "black";
       } 
       else {
         btnCompletar.style.display = "inline-block";
         btnCancelar.style.display = "inline-block";
       }
 
-      // 📌 Evento: Completar cita
+      //  Evento: Completar cita
       btnCompletar.addEventListener("click", async () => {
         const { isConfirmed } = await Swal.fire({
           icon: "question",
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
-      // 📌 Evento: Cancelar cita
+      //  Evento: Cancelar cita
       btnCancelar.addEventListener("click", async () => {
         const { isConfirmed } = await Swal.fire({
           icon: "warning",
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const exito = await cambiarEstado(cita.id_orden, "cancelado");
         if (exito) {
           estadoSpan.textContent = "Cancelado";
-          estadoSpan.style.color = "gray";
+          estadoSpan.style.color = "red";
           btnCompletar.style.display = "none";
           btnCancelar.style.display = "none";
           crearBotonEliminar();
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     });
   } catch (error) {
-    // ❌ Error cargando citas desde el servidor
+    //  Error cargando citas desde el servidor
     await Swal.fire({ icon: "error", title: "Error cargando citas", text: "No se pudieron cargar las citas" });
     console.error("Error cargando citas:", error);
   }

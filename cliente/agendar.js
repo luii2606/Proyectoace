@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const fechaInput = document.querySelector('#fecha');   // Campo de fecha del formulario
   const horaSelect = document.querySelector('#hora');    // Select de horas disponibles
 
-  // --- 📌 BLOQUEAR FECHAS PASADAS ---
+  // ---  BLOQUEAR FECHAS PASADAS ---
   if (fechaInput) {
     const hoy = new Date(); // Obtenemos la fecha actual
     const yyyy = hoy.getFullYear();
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fechaInput.min = `${yyyy}-${mm}-${dd}`; // Se bloquean fechas anteriores a hoy
   }
 
-  // --- 📌 CARGAR NOMBRE E ID DEL ESTILISTA DESDE LA URL ---
+  // --- CARGAR NOMBRE E ID DEL ESTILISTA DESDE LA URL ---
   const nombreEstilista = obtenerParametro("nombre"); // Se extrae el nombre del estilista de la URL
   if (nombreEstilista) {
     document.querySelector(".cuadro__titulo").textContent = `Agendar con ${nombreEstilista}`;
@@ -24,18 +24,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("id-trabajador").value = idTrabajador;
 
     try {
-      // 📌 Petición para obtener info del trabajador
+      //  Petición para obtener info del trabajador
       const respUsuario = await fetch(`http://localhost:8080/pruebaApi/api/usuarios/${idTrabajador}`);
       if (!respUsuario.ok) throw new Error("No se pudo cargar el trabajador");
       const usuario = await respUsuario.json();
 
-      // 📌 Con el rol del trabajador se consultan sus servicios
+      //  Con el rol del trabajador se consultan sus servicios
       if (usuario.cod_tipo_rol) {
         const respServicios = await fetch(`http://localhost:8080/pruebaApi/api/servicios/rol/${usuario.cod_tipo_rol}`);
         if (!respServicios.ok) throw new Error("No se pudo cargar los servicios");
         const servicios = await respServicios.json();
 
-        // 📌 Llenar el <select> con los servicios
+        //  Llenar el <select> con los servicios
         const selectServicios = document.getElementById("select-servicio");
         selectServicios.innerHTML = "<option value=''>Selecciona un servicio...</option>";
         servicios.forEach(servicio => {
@@ -56,13 +56,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // --- 📌 CARGA DE MODALIDADES ---
+  // ---  CARGA DE MODALIDADES ---
   try {
     const respuesta = await fetch("http://localhost:8080/pruebaApi/api/modalidades");
     if (!respuesta.ok) throw new Error("Error al cargar las modalidades");
     const modalidades = await respuesta.json();
 
-    // 📌 Llenamos el select de modalidades
+    //  Llenamos el select de modalidades
     const select = document.getElementById("modalidad");
     select.innerHTML = '<option value="">Seleccione una modalidad</option>';
     modalidades.forEach(modalidad => {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // --- 📌 CARGAR HORAS DISPONIBLES CUANDO CAMBIA LA FECHA ---
+  // ---  CARGAR HORAS DISPONIBLES CUANDO CAMBIA LA FECHA ---
   fechaInput.addEventListener("change", async () => {
     const fecha = fechaInput.value; // Fecha seleccionada
     const idTrabajador = document.getElementById("id-trabajador").value;
@@ -89,14 +89,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!fecha || !idTrabajador) return;
 
     try {
-      // 📌 Consultamos las horas ocupadas del trabajador en la fecha
+      //  Consultamos las horas ocupadas del trabajador en la fecha
       const resp = await fetch(`http://localhost:8080/pruebaApi/api/ordenes/ocupadas?fecha=${fecha}&id=${idTrabajador}`);
       if (!resp.ok) throw new Error("Error al consultar horas ocupadas");
       const ocupadas = await resp.json(); // Ejemplo: ["2025-08-18T14:00:00", "2025-08-18 15:00:00"]
 
       console.log(ocupadas);
 
-      // 📌 Normalizamos horas ocupadas al formato HH:mm
+      //  Normalizamos horas ocupadas al formato HH:mm
       const horasOcupadas = ocupadas.map(h => {
         if (!h) return null;
         const partes = h.includes("T") ? h.split("T") : h.split(" "); // Puede venir con "T" o con espacio
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return hora.length > 5 ? hora.substring(0,5) : hora; // Nos quedamos con HH:mm
       }).filter(Boolean);
 
-      // 📌 Generamos horas disponibles de 08:00 a 18:00
+      //  Generamos horas disponibles de 08:00 a 18:00
       horaSelect.innerHTML = "<option value=''>Selecciona una hora...</option>";
       for (let h = 8; h <= 18; h++) {
         const hora = h.toString().padStart(2,"0") + ":00"; // Ej: "08:00"
@@ -126,13 +126,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // --- 📌 ENVÍO DEL FORMULARIO ---
+  // --- ENVÍO DEL FORMULARIO ---
   const formAgendar = document.querySelector(".formulario");
 
   formAgendar.addEventListener("submit", async function (e) {
     e.preventDefault(); // Evitamos el envío normal
 
-    // 📌 Obtenemos valores del formulario
+    //  Obtenemos valores del formulario
     const fecha = document.getElementById("fecha").value;
     const hora = document.getElementById("hora").value;
     const cod_servi = document.getElementById("select-servicio").value;
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const id_trabajador = document.getElementById("id-trabajador").value;
     const id_cliente = localStorage.getItem("usuario"); // Cliente guardado en localStorage
 
-    // 📌 Validamos campos
+    //  Validamos campos
     if (!fecha || !hora || !cod_servi || !id_modali) {
       Swal.fire({
         icon: "warning",
@@ -151,10 +151,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // 📌 Formamos la fecha con hora para la cita
+    //  Formamos la fecha con hora para la cita
     const fecha_hora_servicio = `${fecha} ${hora}:00`;
 
-    // 📌 Creamos el objeto que enviamos al backend
+    //  Creamos el objeto que enviamos al backend
     const Agenda = {
       fecha_hora_servicio: fecha_hora_servicio,
       id_modali: parseInt(id_modali),
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
-      // 📌 Enviamos la cita al backend
+      //  Enviamos la cita al backend
       const resp = await fetch("http://localhost:8080/pruebaApi/api/ordenes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!resp.ok) throw new Error(await resp.text());
 
-      // 📌 Si todo salió bien, mostramos confirmación
+      //  Si todo salió bien, mostramos confirmación
       Swal.fire({
         icon: "success",
         title: "Cita agendada con éxito",
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-// 📌 Función auxiliar para obtener parámetros de la URL
+//  Función auxiliar para obtener parámetros de la URL
 function obtenerParametro(nombre) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(nombre);

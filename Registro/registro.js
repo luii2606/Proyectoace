@@ -107,8 +107,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
       Swal.fire({
         icon: "success",
         title: "Usuario registrado correctamente",
-        showConfirmButton: false,
-        timer: 1500
+        confirmButtonColor: "#d63384"
       }).then(() => {
         // Redirige a la página de login tras mostrar el mensaje de éxito
         window.location.href = "../Login/login.html";
@@ -119,6 +118,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         icon: "error",
         title: "Nombre de usuario no disponible",
         text: "El nombre de usuario ya está en uso, por favor elige otro"
+        
       });
     } else {
       // Si la respuesta no es exitosa, obtiene y muestra el error

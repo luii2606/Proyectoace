@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const trabajadorAdmin = document.getElementById("trabajador-admin");   // Select de trabajadores
   const tablaBody = document.getElementById("tabla-citas-body");         // Cuerpo de la tabla donde se mostrarán citas
 
-  // --- 📌 Cargar trabajadores en el <select> ---
+  // ---  Cargar trabajadores en el <select> ---
   try {
     // Petición al backend para obtener la lista de trabajadores
     const resp = await fetch("http://localhost:8080/pruebaApi/api/usuarios/trabajadores");
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error cargando trabajadores:", err);
   }
 
-  // --- 📌 Consultar citas cuando se haga clic en "Ver Citas" ---
+  // ---  Consultar citas cuando se haga clic en "Ver Citas" ---
   document.getElementById("btn-ver-citas").addEventListener("click", async () => {
     const fecha = fechaAdmin.value;             // Fecha seleccionada
     const idTrabajador = trabajadorAdmin.value; // Trabajador seleccionado
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (c.fecha_hora) {
             // Convertimos la fecha a objeto Date para formatear la hora
             const fechaObj = new Date(c.fecha_hora.replace(" ", "T")); 
-            // ✅ Mostramos la hora en formato 12 horas con AM/PM
+            //  Mostramos la hora en formato 12 horas con AM/PM
             hora = fechaObj.toLocaleTimeString("es-ES", { 
               hour: "numeric",     // Hora sin cero delante (ej: 1, 2, 3)
               minute: "2-digit",   // Minutos con dos dígitos
@@ -69,20 +69,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
           }
 
-          // 📌 Normalizamos el estado de la cita a minúsculas para comparar
+          //  Normalizamos el estado de la cita a minúsculas para comparar
           const estadoText = (c.estado || "sin estado").toLowerCase();
           let estadoLabel = estadoText.charAt(0).toUpperCase() + estadoText.slice(1); // Capitalizamos
           let color = "black";
 
-          // 📌 Coloreamos según el estado
+          //  Coloreamos según el estado
           if (estadoText === "confirmado") {
             color = "green";
             estadoLabel = "Confirmada";
           } else if (estadoText === "completado") {
-            color = "gray";
+            color = "skyblue";
             estadoLabel = "Completado";
           } else if (estadoText === "cancelado") {
-            color = "gray";
+            color = "red";
             estadoLabel = "Cancelado";
           } else {
             color = "orange"; // Para "pendiente" u otros estados

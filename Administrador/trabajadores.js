@@ -136,8 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
           Swal.fire({
             icon: "success",
             title: "Trabajador actualizado",
-            timer: 1500,
-            showConfirmButton: false,
             confirmButtonColor: "#d63384"
           });
           idEditando = null;
@@ -252,8 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           icon: "success",
           title: "Trabajador eliminado",
-          timer: 1500,
-          showConfirmButton: false,
           confirmButtonColor: "#d63384"
         });
         cargarTrabajadores();
@@ -261,6 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           icon: "error",
           title: "Error al eliminar trabajador",
+          text: "tiene ordenes relacionadas",
           confirmButtonColor: "#d63384"
         });
       }

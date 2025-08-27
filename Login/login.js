@@ -45,9 +45,10 @@ document.getElementById("login-form").addEventListener("submit", async function 
       // Muestra alerta de éxito y oculta el botón de confirmación automáticamente
       Swal.fire({
         icon: "success",
-        title: "Inicio de sesión exitoso",
-        showConfirmButton: false,
-        timer: 1500
+        title: `Bienvenido ${nombreUsuario}`,
+        text: "Inicio de sesión exitoso",
+        confirmButtonColor: "#d63384",
+       
       }).then(() => {
         // Guarda el id del usuario autenticado en el localStorage para usarlo en otras páginas
         localStorage.setItem("usuario", result.id_usuario);
